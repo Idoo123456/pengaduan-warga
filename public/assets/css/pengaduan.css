@@ -1,0 +1,123 @@
+/* SLIDER */
+.pengaduan-slider {
+    height: 700px;
+    border-radius: 22px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0,0,0,.18);
+}
+
+.pengaduan-slider img {
+    width: 100%;
+    height: 700px;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 7s ease;
+}
+
+/* ZOOM HALUS */
+.carousel-item.active img {
+    transform: scale(1.12);
+}
+
+/* FADE + SLIDE SMOOTH (HILANGKAN JEDA PUTIH) */
+.carousel-item {
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+}
+
+/* OVERLAY TEKS */
+.slider-overlay {
+    position: absolute;
+    inset: 0;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,0));
+    color: #fff;
+}
+
+.slider-overlay h4 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.slider-overlay p {
+    font-size: 15px;
+    opacity: .9;
+}
+/* =============================
+   CARD FORM PENGADUAN
+============================= */
+.form-wrapper {
+    background: #ffffff;
+    padding: 42px;
+    border-radius: 24px;
+    box-shadow:
+        0 30px 60px rgba(0,0,0,0.12),
+        0 10px 20px rgba(0,0,0,0.08);
+    position: relative;
+}
+
+/* judul form */
+.form-wrapper h3 {
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+/* deskripsi */
+.form-wrapper p {
+    color: #6c757d;
+    margin-bottom: 28px;
+}
+
+/* input & select */
+.form-wrapper .form-control,
+.form-wrapper .form-select {
+    border-radius: 14px;
+    padding: 14px 18px;
+    border: 1px solid #e1e5eb;
+}
+
+/* focus input */
+.form-wrapper .form-control:focus,
+.form-wrapper .form-select:focus {
+    border-color: #f9b233;
+    box-shadow: 0 0 0 4px rgba(249,178,51,.25);
+}
+
+/* tombol */
+.form-wrapper button {
+    margin-top: 10px;
+    height: 54px;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 16px;
+    box-shadow: 0 18px 35px rgba(249,178,51,.45);
+}
+/* ================================
+   FORM CARD
+================================ */
+.form-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 22px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.1);
+}
+
+.form-card h3 {
+    font-weight: 700;
+}
+
+.form-card .form-control,
+.form-card .form-select {
+    border-radius: 12px;
+    padding: 12px 16px;
+}
+
+.form-card button {
+    height: 52px;
+    border-radius: 40px;
+    box-shadow: 0 12px 30px rgba(249,178,51,.4);
+}
