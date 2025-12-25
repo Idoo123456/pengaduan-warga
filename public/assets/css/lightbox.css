@@ -201,3 +201,77 @@ html.lb-disable-scrolling {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
 }
+.hero-section {
+    position: relative;
+    background: url('/assets/img/hero.jpg') center/cover no-repeat;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+}
+
+.hero-content h1 span {
+    color: #ffc107;
+}
+
+.section {
+    padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: 700;
+}
+
+.feature-grid,
+.step-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 24px;
+}
+
+.feature-card,
+.step-card {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    text-align: center;
+}
+
+.feature-card i {
+    font-size: 40px;
+    color: #ffc107;
+    margin-bottom: 15px;
+}
+
+.step-card span {
+    display: inline-block;
+    background: #ffc107;
+    color: black;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    line-height: 40px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.cta-section {
+    background: #2f3e46;
+    color: white;
+    padding: 80px 0;
+}

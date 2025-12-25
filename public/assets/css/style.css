@@ -109,3 +109,259 @@
         grid-template-columns: 1fr;
     }
 }
+/* FLASH MESSAGE MODERN */
+.flash-message {
+    position: fixed;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    min-width: 320px;
+    max-width: 600px;
+    padding: 14px 20px;
+    border-radius: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 9999;
+    opacity: 0;
+    animation: slideDownFade 0.5s ease forwards;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+.flash-message.success {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #fff;
+}
+
+.flash-message.error {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #fff;
+}
+
+.flash-message button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 16px;
+}
+
+@keyframes slideDownFade {
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.flash-hide {
+    animation: fadeOutUp 0.4s ease forwards;
+}
+
+@keyframes fadeOutUp {
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+}.flash-message {
+    position: fixed;
+    top: 90px;
+    right: 24px;
+    min-width: 280px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-weight: 500;
+    color: #fff;
+    z-index: 9999;
+
+    /* INI YANG BIKIN HALUS */
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.flash-message.success {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.flash-message.error {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* SAAT DIHILANGKAN */
+.flash-hide {
+    opacity: 0;
+    transform: translateY(-15px);
+}
+/* ===============================
+   FLASH MESSAGE (MODERN TOAST)
+================================ */
+.flash-message {
+    position: fixed;
+    top: 100px;
+    right: 24px;
+    min-width: 280px;
+    max-width: 380px;
+    padding: 16px 18px;
+    border-radius: 14px;
+    color: #fff;
+    font-weight: 500;
+    box-shadow: 0 20px 40px rgba(0,0,0,.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    z-index: 9999;
+
+    /* ANIMASI MASUK */
+    opacity: 0;
+    transform: translateY(-15px);
+    animation: flashIn 0.6s ease forwards;
+}
+
+.flash-success {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.flash-error {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.flash-close {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* ANIMASI MASUK */
+@keyframes flashIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ANIMASI KELUAR */
+.flash-hide {
+    opacity: 0;
+    transform: translateY(-15px);
+    transition: all 0.6s ease;
+}
+/* ===============================
+   CARD HOVER ANIMATION (ELEGAN)
+================================ */
+.card-hover {
+    transition: all 0.35s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.card-hover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: linear-gradient(
+        135deg,
+        rgba(255,193,7,0.15),
+        rgba(255,193,7,0)
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+.card-hover:hover::after {
+    opacity: 1;
+}
+
+.card-hover:hover h5,
+.card-hover:hover h6 {
+    color: #f4b400;
+}
+/* ===============================
+   CTA BUTTON (FIX PUTIH + ANIMASI)
+================================ */
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 34px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #ffc107, #ffb300);
+    color: #1f2937;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s ease;
+}
+
+/* glow layer */
+.cta-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #ffd54f, #ffb300);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+/* text layer */
+.cta-btn span {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(255,193,7,.35);
+}
+
+.cta-btn:hover::before {
+    opacity: 1;
+}
+
+/* PENTING: MATIKAN HOVER PUTIH */
+.cta-btn:hover,
+.cta-btn:focus {
+    color: #1f2937;
+    background: linear-gradient(135deg, #ffc107, #ffb300);
+}
+
+/* ===============================
+   PAGE TRANSITION
+================================ */
+.page-transition {
+    animation: fadeInUp 0.6s ease both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* PAGE TRANSITION */
+.page-transition {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .45s ease, transform .45s ease;
+}
+
+.page-transition.show {
+    opacity: 1;
+    transform: translateY(0);
+}
