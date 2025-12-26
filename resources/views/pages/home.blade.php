@@ -19,9 +19,9 @@
         <p>
             Sistem Pengaduan Warga yang modern, cepat, dan transparan.
         </p>
-
         <a href="{{ route('pengaduan.create') }}" class="btn-hero">
             Ajukan Pengaduan
+
         </a>
     </div>
 </section>

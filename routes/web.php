@@ -1,17 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| HOME (WARGA)
+| HOME (GUEST)
 |--------------------------------------------------------------------------
 */
 Route::get('/', function () {
-    return view('warga.home');
+    return view('pages.home');
 })->name('home');
 
 /*
@@ -19,24 +19,37 @@ Route::get('/', function () {
 | PENGADUAN (GUEST)
 |--------------------------------------------------------------------------
 */
-Route::get('/pengaduan', [PengaduanController::class, 'create'])
-    ->name('pengaduan.create');
+Route::get('/pengaduan', function () {
+    return view('pengaduan.form');
+})->name('pengaduan.create');
 
 Route::post('/pengaduan', [PengaduanController::class, 'store'])
     ->name('pengaduan.store');
 
 /*
 |--------------------------------------------------------------------------
-| TENTANG
+| TENTANG (GUEST)
 |--------------------------------------------------------------------------
 */
 Route::get('/tentang', function () {
-    return view('tentang');
+    return view('pages.tentang.index');
 })->name('tentang');
+
+Route::get('/tentang/website', function () {
+    return view('pages.tentang.website');
+})->name('tentang.website');
+
+Route::get('/tentang/saya', function () {
+    return view('pages.tentang.saya');
+})->name('tentang.saya');
+
+Route::get('/tentang/kontak', function () {
+    return view('pages.tentang.kontak');
+})->name('tentang.kontak');
 
 /*
 |--------------------------------------------------------------------------
-| AUTH (LOGIN & LOGOUT)
+| AUTH
 |--------------------------------------------------------------------------
 */
 Route::get('/login', [AuthController::class, 'loginForm'])
@@ -50,13 +63,12 @@ Route::post('/logout', [AuthController::class, 'logout'])
 
 /*
 |--------------------------------------------------------------------------
-| DASHBOARD (AUTH REQUIRED - CUSTOM SESSION)
+| DASHBOARD (ADMIN)
 |--------------------------------------------------------------------------
 */
 Route::get('/dashboard', function () {
 
-    // 🔐 CEK LOGIN
-    if (!session()->has('user')) {
+    if (! session()->has('user')) {
         return redirect()->route('login')
             ->with('error', 'Silakan login terlebih dahulu.');
     }
@@ -67,18 +79,18 @@ Route::get('/dashboard', function () {
 
 /*
 |--------------------------------------------------------------------------
-| USER MANAGEMENT (OPTIONAL PROTECTED)
+| USER MANAGEMENT
 |--------------------------------------------------------------------------
 */
 Route::get('/user', function () {
-    if (!session()->has('user')) {
+    if (! session()->has('user')) {
         return redirect()->route('login');
     }
     return app(UserController::class)->index();
 })->name('user.index');
 
 Route::get('/user/create', function () {
-    if (!session()->has('user')) {
+    if (! session()->has('user')) {
         return redirect()->route('login');
     }
     return app(UserController::class)->create();

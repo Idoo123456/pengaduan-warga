@@ -365,3 +365,1289 @@
     opacity: 1;
     transform: translateY(0);
 }
+/* ABOUT PAGE */
+.about-hero {
+    background: linear-gradient(135deg, #2f3e46, #354f52);
+    padding: 100px 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.about-hero h1 {
+    font-size: 42px;
+    font-weight: 800;
+}
+
+.about-hero span {
+    color: #ffc107;
+}
+
+.about-section {
+    padding: 80px 20px;
+    background: #f8f9fa;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.about-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.08);
+    transition: .35s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-6px);
+}
+
+.about-me {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.about-me img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.social-links a {
+    padding: 10px 18px;
+    background: #ffc107;
+    border-radius: 30px;
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255,193,7,.45);
+}
+/* =========================
+   ABOUT PAGE
+========================= */
+.about-hero {
+    background: linear-gradient(135deg, #2f3e46, #354f52);
+    padding: 110px 20px 90px;
+    color: #fff;
+}
+
+.about-hero h1 {
+    font-size: 42px;
+    font-weight: 800;
+}
+
+.about-hero h1 span {
+    color: #ffc107;
+}
+
+.about-hero p {
+    max-width: 650px;
+    margin: 15px auto 0;
+    font-size: 17px;
+    opacity: .9;
+}
+
+/* GRID */
+.about-section {
+    padding: 80px 20px;
+    background: #f8f9fa;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+/* CARD */
+.about-card {
+    background: #ffffff;
+    padding: 36px 30px;
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #212529;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+    transition: all .35s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 28px 60px rgba(0,0,0,0.15);
+}
+
+/* ICON */
+.about-icon {
+    font-size: 42px;
+    margin-bottom: 14px;
+}
+
+/* PROFILE */
+.about-profile {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.about-profile img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #ffc107;
+}
+
+/* TEXT */
+.about-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.about-card p {
+    font-size: 15px;
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.about-link {
+    display: inline-block;
+    margin-top: 16px;
+    font-weight: 600;
+    color: #ffc107;
+}
+/* ===============================
+   ABOUT CARD GRID
+================================ */
+.about-section {
+    padding: 100px 0;
+    background: #f8fafc;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* CARD */
+.about-card {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 36px 32px;
+    box-shadow: 0 20px 45px rgba(0,0,0,.08);
+    text-align: center;
+    position: relative;
+    transition: all .45s cubic-bezier(.4,0,.2,1);
+    cursor: pointer;
+}
+
+/* hover hidup */
+.about-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 35px 70px rgba(0,0,0,.15);
+}
+
+/* ICON */
+.about-icon {
+    font-size: 44px;
+    margin-bottom: 18px;
+}
+
+/* FOTO PROFIL */
+.about-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #ffc107;
+    margin-bottom: 16px;
+}
+
+/* TITLE */
+.about-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* DESC */
+.about-card p {
+    font-size: 15px;
+    color: #6b7280;
+    line-height: 1.7;
+}
+
+/* LINK */
+.about-link {
+    display: inline-block;
+    margin-top: 20px;
+    font-weight: 600;
+    color: #ffc107;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.about-link:hover {
+    color: #ffb300;
+}
+/* ===============================
+   ABOUT DETAIL PAGE
+================================ */
+.about-detail {
+    min-height: 100vh;
+    padding: 120px 20px;
+    background: linear-gradient(135deg, #2f3e46, #354f52);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CARD BESAR */
+.about-detail-card {
+    background: #ffffff;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 28px;
+    padding: 60px 50px;
+    box-shadow: 0 40px 90px rgba(0,0,0,.35);
+    animation: fadeSlide .6s ease;
+}
+
+/* animasi masuk */
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* TITLE */
+.about-detail-card h1 {
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+/* TEXT */
+.about-detail-card p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #4b5563;
+}
+
+/* BACK BUTTON */
+.btn-back {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 12px 30px;
+    background: #ffc107;
+    color: #1f2937;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.btn-back:hover {
+    background: #ffb300;
+    transform: translateY(-2px);
+}
+/* ================================
+   PROFILE PAGE
+================================ */
+.profile-page {
+    min-height: calc(100vh - 80px);
+    background: #f8f9fa;
+    position: relative;
+    padding: 40px;
+}
+
+/* BACK BUTTON */
+.btn-back {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background: #ffc107;
+    color: #000;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255,193,7,.35);
+}
+
+/* WRAPPER */
+.profile-wrapper {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #fff;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,.12);
+    animation: fadeUp .6s ease;
+}
+
+/* FOTO */
+.profile-photo {
+    position: relative;
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* CARD CONTENT */
+.profile-card {
+    padding: 70px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-card h1 {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.profile-card .role {
+    color: #ffc107;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.profile-card .desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 32px;
+}
+
+/* ACTION */
+.profile-actions .btn-primary {
+    background: linear-gradient(135deg, #ffc107, #ffb300);
+    padding: 14px 36px;
+    border-radius: 30px;
+    font-weight: 600;
+    color: #000;
+    text-decoration: none;
+    transition: 0.35s;
+}
+
+.profile-actions .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(255,193,7,.35);
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .profile-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-card {
+        padding: 40px 30px;
+    }
+
+    .btn-back {
+        top: 20px;
+        left: 20px;
+    }
+}
+/* ===== ABOUT PROFILE LAYOUT ===== */
+.about-wrapper {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    padding: 120px 80px;
+    align-items: center;
+}
+
+/* FOTO */
+.about-photo {
+    position: relative;
+    max-height: 520px;        /* ⬅️ kunci biar ga kegedean */
+    overflow: hidden;
+    border-radius: 28px;      /* ⬅️ sudut tumpul */
+}
+
+.about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* overlay biar lebih soft */
+.about-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.05),
+        rgba(0,0,0,0.45)
+    );
+}
+    /* ===============================
+   FOTO PROFIL (KIRI)
+================================ */
+.profile-image-wrapper {
+    position: relative;
+    height: 100%;
+    border-radius: 28px;          /* ⬅ sudut tumpul modern */
+    overflow: hidden;             /* ⬅ WAJIB agar rounded bekerja */
+    box-shadow: 0 30px 60px rgba(0,0,0,.25);
+}
+
+.profile-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(.85);
+}
+
+/* Overlay teks di foto */
+.profile-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,.65),
+        rgba(0,0,0,0)
+    );
+    color: #fff;
+}
+
+.profile-overlay h2 {
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.profile-overlay span {
+    color: #ffc107;
+    font-weight: 600;
+}
+
+/* ===============================
+   TOMBOL KEMBALI (FIX MENABRAK)
+================================ */
+.btn-back {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    padding: 8px 16px;          /* ⬅ DIPERKECIL */
+    font-size: 14px;
+    border-radius: 999px;
+    background: rgba(255, 193, 7, .95);
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,.25);
+    z-index: 10;
+    transition: .3s ease;
+}
+
+.btn-back:hover {
+    transform: translateY(-2px);
+    background: #ffb300;
+}
+/* =============================
+   BACK BUTTON
+============================= */
+.btn-back {
+    position: fixed;
+    top: 90px;
+    left: 30px;
+    background: #ffc107;
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    z-index: 100;
+    transition: .3s ease;
+}
+
+.btn-back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255,193,7,.4);
+}
+
+/* =============================
+   PROFILE PAGE LAYOUT
+============================= */
+.profile-page {
+    display: flex;
+    min-height: calc(100vh - 50px);
+}
+
+/* =============================
+   IMAGE SIDE
+============================= */
+.profile-image {
+    width: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* OVERLAY TEXT DI FOTO */
+.image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(20,45,50,.85),
+        rgba(20,45,50,.25)
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 60px;
+    color: #fff;
+}
+
+.image-overlay h1 {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.image-overlay span {
+    font-size: 18px;
+    color: #ffc107;
+    font-weight: 500;
+}
+
+/* =============================
+   CONTENT SIDE
+============================= */
+.profile-content {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+/* CARD */
+.profile-card {
+    background: #fff;
+    padding: 50px;
+    border-radius: 24px;
+    max-width: 520px;
+    box-shadow: 0 25px 60px rgba(0,0,0,.15);
+    animation: fadeUp .6s ease;
+}
+
+.profile-card h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.profile-card p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+/* BUTTON */
+.btn-primary {
+    display: inline-block;
+    background: #ffc107;
+    color: #000;
+    padding: 14px 34px;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(255,193,7,.4);
+}
+
+/* =============================
+   ANIMATION
+============================= */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =============================
+   RESPONSIVE
+============================= */
+@media (max-width: 900px) {
+    .profile-page {
+        flex-direction: column;
+    }
+
+    .profile-image,
+    .profile-content {
+        width: 100%;
+    }
+
+    .profile-image {
+        height: 60vh;
+    }
+}
+.profile-wrapper {
+    max-width: 1200px;
+    margin: 120px auto 80px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+/* FOTO */
+.profile-image {
+    position: relative;
+    height: 420px;               /* ⬅️ BATAS TINGGI */
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0,0,0,.25);
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;           /* ⬅️ BIAR RAPI */
+}
+
+/* OVERLAY TEXT DI DALAM FOTO */
+.profile-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,.65),
+        rgba(0,0,0,.15),
+        transparent
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px;
+    color: #fff;
+}
+
+.profile-overlay h2 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.profile-overlay span {
+    font-size: 16px;
+    color: #ffc107;
+}
+/* ===============================
+   PROFILE SECTION
+================================ */
+.profile-section {
+    padding: 120px 80px;
+    background: #f8f9fa;
+    position: relative;
+}
+
+/* TOMBOL KEMBALI */
+.btn-back {
+    position: fixed;
+    top: 90px;
+    left: 30px;
+    background: #ffc107;
+    color: #000;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    z-index: 999;
+}
+
+/* WRAPPER */
+.profile-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    max-width: 1100px;
+    margin: auto;
+    align-items: center;
+}
+
+/* FOTO */
+.profile-image {
+    position: relative;
+    height: 420px;                 /* 🔑 KUNCI TINGGI */
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;             /* 🔑 FOTO TIDAK MELEBAR */
+}
+
+/* OVERLAY TEXT DI FOTO */
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    inset-inline: 0;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(0,0,0,.65), transparent);
+    color: #fff;
+}
+
+.image-overlay h2 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.image-overlay span {
+    font-size: 14px;
+    opacity: .85;
+}
+
+/* CARD */
+.profile-card {
+    background: #fff;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.12);
+}
+
+.profile-card h3 {
+    font-size: 26px;
+    margin-bottom: 16px;
+}
+
+.profile-card p {
+    color: #6c757d;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+/* BUTTON */
+.btn-primary {
+    background: #ffc107;
+    color: #000;
+    padding: 14px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: .3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(255,193,7,.4);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .profile-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-image {
+        height: 320px;
+    }
+}
+/* =========================
+   ABOUT ME LAYOUT
+========================= */
+
+.about-me {
+    padding: 120px 80px;
+    position: relative;
+}
+
+/* tombol kembali */
+.btn-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #ffc107;
+    color: #000;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* GRID */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+/* =========================
+   FOTO
+========================= */
+.photo-card {
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+    height: 420px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+}
+
+.photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,.65),
+        rgba(0,0,0,.05)
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+    color: #fff;
+}
+
+.photo-overlay h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.photo-overlay span {
+    font-size: 14px;
+    color: #ffc107;
+}
+
+/* =========================
+   CARD DATA DIRI (TENGAH)
+========================= */
+.profile-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.1);
+}
+
+.profile-card h3 {
+    margin-bottom: 20px;
+}
+
+.profile-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.profile-card li {
+    margin-bottom: 12px;
+    font-size: 15px;
+    color: #555;
+}
+
+/* =========================
+   DESKRIPSI
+========================= */
+.desc-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.1);
+}
+
+.desc-card h3 {
+    margin-bottom: 16px;
+}
+
+.desc-card p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+/* BUTTON */
+.btn-primary {
+    display: inline-block;
+    padding: 14px 28px;
+    background: #ffc107;
+    color: #000;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+}
+.photo-wrapper,
+.photo-container,
+.profile-photo {
+    background: none !important;
+    box-shadow: none !important;
+    overflow: hidden;
+}
+/* =====================
+   TENTANG WEBSITE
+===================== */
+.about-page,
+.contact-page {
+    background: #f6f8fb;
+    padding: 120px 24px;
+}
+
+.about-container,
+.contact-container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.about-card,
+.contact-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 48px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.08);
+    animation: fadeUp .6s ease;
+}
+
+.about-card h1,
+.contact-card h1 {
+    font-size: 32px;
+    margin-bottom: 16px;
+    color: #263238;
+}
+
+.about-card p,
+.contact-card p {
+    color: #6b7280;
+    line-height: 1.7;
+}
+
+/* GRID INFO */
+.about-grid {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 24px;
+}
+
+.about-box {
+    background: #f9fafb;
+    border-radius: 16px;
+    padding: 24px;
+    transition: .3s ease;
+}
+
+.about-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.about-box h4 {
+    margin-bottom: 8px;
+}
+
+/* =====================
+   KONTAK
+===================== */
+.contact-list {
+    margin: 32px 0;
+    display: grid;
+    gap: 16px;
+}
+
+.contact-list a {
+    background: #ffc107;
+    color: #000;
+    padding: 14px 20px;
+    border-radius: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: .3s;
+}
+
+.contact-list a:hover {
+    background: #ffb300;
+    transform: translateX(6px);
+}
+
+/* =====================
+   BUTTON
+===================== */
+.btn-back {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: #ffc107;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.btn-back:hover {
+    background: #ffc107;
+}
+
+/* =====================
+   ANIMATION
+===================== */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ================= CONTACT ================= */
+.contact-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f5f7fa;
+    padding: 40px 20px;
+}
+
+.contact-card {
+    background: #fff;
+    width: 100%;
+    max-width: 900px;
+    padding: 48px;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.08);
+}
+
+.contact-card h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.contact-card .subtitle {
+    color: #6b7280;
+    margin-bottom: 36px;
+}
+
+/* GRID */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+/* ITEM */
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px;
+    border-radius: 18px;
+    text-decoration: none;
+    color: #111;
+    background: #f9fafb;
+    transition: all .35s ease;
+}
+
+.contact-item span {
+    font-size: 32px;
+}
+
+.contact-item strong {
+    display: block;
+    font-size: 16px;
+}
+
+.contact-item small {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+/* HOVER */
+.contact-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,.12);
+}
+
+/* PLATFORM COLORS */
+.contact-item.wa:hover {
+    background: #dcfce7;
+}
+
+.contact-item.ig:hover {
+    background: linear-gradient(135deg,#fce7f3,#fae8ff);
+}
+
+.contact-item.fb:hover {
+    background: #e0f2fe;
+}
+
+.contact-item.mail:hover {
+    background: #fef3c7;
+}
+/* =========================
+   CONTACT PAGE
+========================= */
+
+.contact-page {
+    padding-top: 140px; /* FIX HEADER FIXED */
+    padding-bottom: 80px;
+    background: #f5f7fa;
+}
+
+.btn-back {
+    position: fixed;
+    top: 90px; /* di bawah header */
+    left: 30px;
+    background: #ffc107;
+    color: #000;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    transition: all .25s ease;
+    z-index: 999;
+}
+
+.btn-back:hover {
+    transform: translateY(-2px);
+    background: #ffb300;
+}
+
+.contact-container {
+    max-width: 900px;
+    margin: auto;
+    background: #fff;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0,0,0,.08);
+}
+
+.contact-container h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px;
+    border-radius: 16px;
+    text-decoration: none;
+    color: #fff;
+    transition: all .3s ease;
+    box-shadow: 0 15px 30px rgba(0,0,0,.15);
+}
+
+.contact-card h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.contact-card p {
+    margin: 0;
+    font-size: 14px;
+    opacity: .9;
+}
+
+.contact-card .icon {
+    font-size: 34px;
+}
+
+/* WARNA */
+.whatsapp { background: linear-gradient(135deg, #25D366, #1ebe5d); }
+.instagram { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
+.facebook { background: linear-gradient(135deg, #1877f2, #0f5bd6); }
+.email { background: linear-gradient(135deg, #ff9800, #ffb74d); }
+
+/* HOVER */
+.contact-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0,0,0,.25);
+}
