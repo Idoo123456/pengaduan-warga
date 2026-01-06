@@ -2,17 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class KategoriPengaduan extends Model
 {
-    protected $table = 'kategori_pengaduan';
-    protected $primaryKey = 'kategori_id';
-    public $timestamps = false;
+    use HasFactory;
 
-    protected $fillable = [
-        'nama',
-        'sla_hari',
-        'prioritas'
-    ];
+    protected $table = 'kategori_pengaduan';
+
+    protected $fillable = ['nama'];
+
+    public function pengaduan()
+    {
+        return $this->hasMany(
+            Pengaduan::class,
+            'kategori_pengaduan_id'
+        );
+    }
 }

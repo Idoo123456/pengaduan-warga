@@ -2,22 +2,32 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Pengaduan extends Model
 {
-    protected $table = 'pengaduan';
-    protected $primaryKey = 'pengaduan_id';
+    use HasFactory;
+
+    protected $table = 'pengaduans';
 
     protected $fillable = [
         'nomor_tiket',
-        'warga_id',
-        'kategori_id',
+        'user_id',
+        'kategori_pengaduan_id',
+        'nama',
+        'email',
         'judul',
-        'deskripsi',
-        'status',
-        'lokasi_text',
+        'isi_pengaduan',
+        'jalan',
         'rt',
-        'rw'
+        'rw',
+        'foto',
+        'status',
     ];
+
+    public function kategoriPengaduan()
+    {
+        return $this->belongsTo(KategoriPengaduan::class);
+    }
 }

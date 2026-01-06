@@ -2,97 +2,77 @@
 <html lang="id">
 
 <head>
-    <style>
-        main {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-        }
-    </style>
-
     <meta charset="UTF-8">
     <title>@yield('title', 'SiPAWA')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{-- BOOTSTRAP CSS --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    {{-- CSS GLOBAL --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/header-fix.css') }}">
-
-    {{-- HOME ONLY --}}
-    @if (request()->routeIs('home'))
-        <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
+    {{-- CSS --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/auth.css') }}">
+    @if (request()->is('pengaduan/create'))
+        <link rel="stylesheet" href="{{ asset('assets/css/pengaduan-create.css') }}">
     @endif
 
-    {{-- PENGADUAN ONLY --}}
-    @if (Request::is('pengaduan*'))
-        <link rel="stylesheet" href="{{ asset('assets/css/pengaduan.css') }}">
-    @endif
 
-    @stack('css')
 </head>
 
-<body class="@yield('body-class')">
+<body>
 
-    {{-- HEADER --}}
     @include('partials.header')
 
-    {{-- FLASH MESSAGE (SATU-SATUNYA TEMPAT) --}}
-    @include('partials.flash')
-
-    {{-- CONTENT --}}
-    <main>
+    <main class="page">
         @yield('content')
     </main>
 
-    {{-- FOOTER OPTIONAL --}}
-    @includeWhen(View::exists('partials.footer'), 'partials.footer')
+    @include('partials.footer')
 
-    {{-- BOOTSTRAP JS --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    @if (auth()->check())
+        <div class="dropdown">
+            <button class="btn-user">
+                {{ auth()->user()->name }}
+            </button>
+            <div class="dropdown-menu">
+                <p>{{ auth()->user()->email }}</p>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
+    @else
+        <a href="{{ route('login') }}" class="btn-login">Login</a>
+    @endif
 
-    {{-- FLASH MESSAGE SCRIPT --}}
     <script>
-        function closeFlash() {
-            const el = document.getElementById('flashMessage');
-            if (el) {
-                el.classList.add('flash-hide');
-                setTimeout(() => el.remove(), 700);
-            }
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdown = document.querySelector('.user-dropdown');
+            const btn = document.querySelector('.user-btn');
 
-        // ⏱️ ATUR DURASI DI SINI
-        // 8000 = 8 DETIK (LEBIH NYAMAN)
-        setTimeout(() => {
-            closeFlash();
-        }, 5000);
-    </script>
-    <script>
-        document.querySelectorAll('a[href]').forEach(link => {
-            if (link.hostname === window.location.hostname) {
-                link.addEventListener('click', function(e) {
-                    const target = this.getAttribute('href');
-                    if (target.startsWith('#')) return;
+            if (!dropdown || !btn) return;
 
-                    e.preventDefault();
-                    document.body.style.opacity = 0;
-                    document.body.style.transition = 'opacity 0.3s ease';
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
 
-                    setTimeout(() => {
-                        window.location.href = target;
-                    }, 300);
-                });
-            }
+            document.addEventListener('click', () => {
+                dropdown.classList.remove('active');
+            });
         });
     </script>
-    @stack('js')
+
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            document.body.classList.add("page-transition");
-            requestAnimationFrame(() => {
-                document.body.classList.add("show");
-            });
+        document.addEventListener('click', function(e) {
+            const dropdown = document.querySelector('.user-dropdown');
+            const button = document.querySelector('.user-btn');
+
+            if (!dropdown) return;
+
+            if (button.contains(e.target)) {
+                dropdown.classList.toggle('active');
+            } else {
+                dropdown.classList.remove('active');
+            }
         });
     </script>
 
