@@ -5,11 +5,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
-    /* LOGIN */
+    /* ================= LOGIN ================= */
+
     public function loginForm()
     {
         return view('auth.login');
@@ -17,22 +17,23 @@ class AuthController extends Controller
 
     public function loginProcess(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+        $request->validate([
+            'email'    => 'required|email',
+            'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
-            return redirect()->route('home');
+
+            return redirect()->route('home')
+                ->with('success', 'Login berhasil. Selamat datang!');
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau password salah',
-        ]);
+        return back()->with('error', 'Email atau password salah.');
     }
 
-    /* REGISTER */
+    /* ================= REGISTER ================= */
+
     public function registerForm()
     {
         return view('auth.register');
@@ -41,67 +42,33 @@ class AuthController extends Controller
     public function registerProcess(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed'
-        ]);
-
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        return redirect()->route('login')->with('success', 'Akun berhasil dibuat');
-    }
-
-    /* LOGOUT */
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect()->route('login');
-    }
-
-    /* FORGOT PASSWORD */
-    public function forgotPasswordForm()
-    {
-        return view('auth.forgot-password');
-    }
-
-    public function sendResetLink(Request $request)
-    {
-        $request->validate(['email' => 'required|email']);
-
-        Password::sendResetLink($request->only('email'));
-
-        return back()->with('status', 'Link reset password telah dikirim');
-    }
-
-    public function resetPasswordForm($token)
-    {
-        return view('auth.reset-password', compact('token'));
-    }
-
-    public function resetPassword(Request $request)
-    {
-        $request->validate([
-            'token' => 'required',
-            'email' => 'required|email',
+            'nama'     => 'required|string|max:100',
+            'nik'      => 'required|digits:16|unique:users,nik',
+            'email'    => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
         ]);
 
-        Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function ($user, $password) {
-                $user->update([
-                    'password' => Hash::make($password),
-                ]);
-            }
-        );
+        User::create([
+            'nama'     => $request->nama,
+            'nik'      => $request->nik,
+            'email'    => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
-        return redirect()->route('login')->with('success', 'Password berhasil direset');
+        return redirect()->route('login')
+            ->with('success', 'Akun berhasil dibuat. Silakan login.');
+    }
+
+    /* ================= LOGOUT ================= */
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login')
+            ->with('success', 'Logout berhasil.');
     }
 }
-

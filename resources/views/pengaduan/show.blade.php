@@ -1,208 +1,301 @@
 @extends('layouts.main')
-
-@section('title', $pengaduan->judul)
+@section('title', 'Detail Pengaduan')
 
 @section('content')
-<style>
-/* ===== PAGE ===== */
-.page{
-    background:#f6f8fc;
-    padding:80px 0;
-}
 
-.container{
-    max-width:1000px;
-    margin:auto;
-}
+    <style>
+        /* ================= PAGE ================= */
+        .page {
+            background: linear-gradient(180deg, #f8fafc, #eef2ff);
+            padding: 80px 24px;
+        }
 
-/* ===== CARD ===== */
-.detail-card{
-    background:#fff;
-    border-radius:28px;
-    padding:40px;
-    box-shadow:0 40px 80px rgba(0,0,0,.1);
-}
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
 
-/* ===== HEADER ===== */
-.detail-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:20px;
-    margin-bottom:24px;
-}
+        /* ================= HEADER ================= */
+        .pengaduan-header {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 36px 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .12);
+            margin-bottom: 40px;
+        }
 
-.detail-header h1{
-    font-size:32px;
-    font-weight:800;
-    margin:0;
-    color:#0f172a;
-}
+        .pengaduan-header h1 {
+            font-size: 34px;
+            margin: 0;
+            font-weight: 800;
+        }
 
-/* ===== BADGE ===== */
-.badge{
-    padding:8px 18px;
-    border-radius:999px;
-    font-size:13px;
-    font-weight:600;
-    background:#dbeafe;
-    color:#2563eb;
-}
+        .pengaduan-header p {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #64748b;
+        }
 
-/* ===== CONTENT ===== */
-.section{
-    margin-top:28px;
-}
+        /* ================= STATUS ================= */
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 14px;
+        }
 
-.label{
-    font-weight:700;
-    font-size:14px;
-    color:#475569;
-    margin-bottom:6px;
-}
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
 
-.value{
-    font-size:15px;
-    color:#0f172a;
-    line-height:1.7;
-}
+        .status-dikirim {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
 
-/* ===== IMAGE ===== */
-.photo{
-    margin-top:30px;
-}
+        .status-dikirim .status-dot {
+            background: #6366f1
+        }
 
-.photo img{
-    width:100%;
-    max-height:420px;
-    object-fit:cover;
-    border-radius:20px;
-    box-shadow:0 20px 40px rgba(0,0,0,.12);
-}
+        .status-diproses {
+            background: #fef3c7;
+            color: #92400e;
+        }
 
-/* ===== ACTIONS ===== */
-.actions{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:40px;
-    gap:16px;
-}
+        .status-diproses .status-dot {
+            background: #f59e0b
+        }
 
-.left-actions{
-    display:flex;
-    gap:12px;
-}
+        .status-selesai {
+            background: #dcfce7;
+            color: #166534;
+        }
 
-.btn{
-    padding:12px 26px;
-    border-radius:999px;
-    font-weight:600;
-    text-decoration:none;
-    border:none;
-    cursor:pointer;
-}
+        .status-selesai .status-dot {
+            background: #22c55e
+        }
 
-.btn-primary{
-    background:linear-gradient(135deg,#6366f1,#4f46e5);
-    color:#fff;
-    box-shadow:0 14px 28px rgba(79,70,229,.4);
-}
+        /* ================= CARD ================= */
+        .card {
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 50px;
+            box-shadow: 0 40px 90px rgba(79, 70, 229, .18);
+        }
 
-.btn-warning{
-    background:#facc15;
-    color:#854d0e;
-}
+        /* ================= CONTENT ================= */
+        .content {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 50px;
+        }
 
-.btn-danger{
-    background:#ef4444;
-    color:#fff;
-}
+        /* ================= FOTO ================= */
+        .photo-box {
+            background: #f1f5f9;
+            border-radius: 24px;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
 
-.btn-secondary{
-    border:1px solid #cbd5f5;
-    color:#4338ca;
-    background:#fff;
-}
+        .photo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-/* ===== MOBILE ===== */
-@media(max-width:768px){
-    .detail-header{
-        flex-direction:column;
-        align-items:flex-start;
-    }
+        .no-photo {
+            text-align: center;
+            color: #64748b;
+        }
 
-    .actions{
-        flex-direction:column-reverse;
-        align-items:stretch;
-    }
+        .no-photo span {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 10px;
+        }
 
-    .left-actions{
-        flex-direction:column;
-    }
-}
-</style>
+        /* ================= INFO ================= */
+        .info {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            row-gap: 18px;
+            column-gap: 20px;
+        }
 
-<div class="page">
-    <div class="container">
+        .info b {
+            color: #0f172a;
+        }
 
-        <div class="detail-card">
+        .info p {
+            margin: 0;
+            color: #475569;
+        }
 
-            {{-- HEADER --}}
-            <div class="detail-header">
-                <h1>{{ $pengaduan->judul }}</h1>
-                <span class="badge">{{ $pengaduan->status }}</span>
-            </div>
+        /* ================= ACTIONS ================= */
+        .actions {
+            margin-top: 50px;
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
 
-            {{-- ISI --}}
-            <div class="section">
-                <div class="label">Isi Pengaduan</div>
-                <div class="value">{{ $pengaduan->isi_pengaduan }}</div>
-            </div>
+        /* SEMUA tombol */
+        .actions .btn,
+        .actions form {
+            width: 150px;
+            /* ⬅️ KUNCI UTAMA */
+        }
 
-            {{-- ALAMAT --}}
-            <div class="section">
-                <div class="label">Alamat</div>
-                <div class="value">
-                    {{ $pengaduan->jalan }},
-                    RT {{ $pengaduan->rt }} / RW {{ $pengaduan->rw }}
+        /* tombol di dalam form */
+        .actions form button {
+            width: 100%;
+        }
+
+        /* style tombol */
+        .btn {
+            padding: 14px 0;
+            border-radius: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-back {
+            border: 1px solid #6366f1;
+            color: #6366f1;
+            background: #fff;
+        }
+
+        .btn-edit {
+            background: #fde68a;
+            color: #92400e;
+        }
+
+        .btn-delete {
+            background: #fee2e2;
+            color: #991b1b;
+            border: none;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media(max-width:900px) {
+            .pengaduan-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <div class="page">
+        <div class="container">
+
+            <!-- HEADER -->
+            <div class="pengaduan-header">
+                <div>
+                    <h1>{{ $pengaduan->judul }}</h1>
+                    <p>Laporan pengaduan masyarakat</p>
                 </div>
+
+                {{-- STATUS --}}
+                @if ($pengaduan->status === 'Dikirim')
+                    <div class="status-badge status-dikirim">
+                        <span class="status-dot"></span> Dikirim
+                    </div>
+                @elseif($pengaduan->status === 'Diproses')
+                    <div class="status-badge status-diproses">
+                        <span class="status-dot"></span> Diproses
+                    </div>
+                @elseif($pengaduan->status === 'Selesai')
+                    <div class="status-badge status-selesai">
+                        <span class="status-dot"></span> Selesai
+                    </div>
+                @endif
             </div>
 
-            {{-- FOTO --}}
-            @if($pengaduan->foto)
-                <div class="photo">
-                    <img src="{{ asset('storage/'.$pengaduan->foto) }}">
+            <!-- CARD -->
+            <div class="card">
+
+                <div class="content">
+
+                    <!-- FOTO -->
+                    <div class="photo-box">
+                        @if ($pengaduan->foto)
+                            <img src="{{ asset('storage/' . $pengaduan->foto) }}" alt="Foto Pengaduan">
+                        @else
+                            <div class="no-photo">
+                                <span>📷</span>
+                                <p>Tidak ada foto lampiran</p>
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- INFO -->
+                    <div class="info">
+                        <b>Nama Pelapor</b>
+                        <p>{{ $pengaduan->nama }}</p>
+
+                        <b>Kategori</b>
+                        <p>{{ $pengaduan->kategori->nama }}</p>
+
+                        <b>Isi Pengaduan</b>
+                        <p>{{ $pengaduan->isi_pengaduan }}</p>
+
+                        <b>Alamat</b>
+                        <p>{{ $pengaduan->jalan }}, RT {{ $pengaduan->rt }} / RW {{ $pengaduan->rw }}</p>
+
+                        <b>Tanggal</b>
+                        <p>{{ $pengaduan->created_at->format('d M Y, H:i') }}</p>
+                    </div>
+
                 </div>
-            @endif
 
-            {{-- ACTIONS --}}
-            <div class="actions">
+                <!-- ACTION -->
+                <!-- ACTION -->
+                <div class="actions">
+                    <a href="{{ route('pengaduan.index') }}" class="btn btn-back">Kembali</a>
 
-                <a href="{{ route('pengaduan.index') }}" class="btn btn-secondary">
-                    ← Kembali
-                </a>
-
-                <div class="left-actions">
-                    <a href="{{ route('pengaduan.edit',$pengaduan->id) }}" class="btn btn-warning">
+                    <a href="{{ route('pengaduan.edit', $pengaduan->id) }}" class="btn btn-edit">
                         Edit
                     </a>
 
-                    <form action="{{ route('pengaduan.destroy',$pengaduan->id) }}"
-                          method="POST"
-                          onsubmit="return confirm('Yakin ingin menghapus pengaduan ini?')">
+                    <form method="POST" action="{{ route('pengaduan.destroy', $pengaduan->id) }}" id="deleteForm">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger">
+
+                        <button type="button" class="btn btn-delete"
+                            onclick="openConfirm(
+                'Apakah Anda yakin ingin menghapus pengaduan ini?',
+                () => document.getElementById('deleteForm').submit()
+            )">
                             Hapus
                         </button>
                     </form>
                 </div>
 
+
             </div>
 
         </div>
-
     </div>
-</div>
+
 @endsection

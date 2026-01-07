@@ -299,6 +299,68 @@
                 justify-content: center;
             }
         }
+
+        /* ================= GLOBAL PAGE ANIMATION ================= */
+        .about-page {
+            animation: pageFade .6s ease both;
+        }
+
+        @keyframes pageFade {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ================= CARD HOVER ANIMATION ================= */
+        .info-card,
+        .metric,
+        .feature,
+        .step,
+        .developer {
+            transition: transform .35s ease, box-shadow .35s ease;
+        }
+
+        .info-card:hover,
+        .metric:hover,
+        .feature:hover,
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(79, 70j70, 229, .25);
+        }
+
+        /* ================= BUTTON HOVER ================= */
+        .btn-primary,
+        .btn-outline,
+        .dev-btn {
+            transition: all .3s ease;
+        }
+
+        .btn-primary:hover,
+        .dev-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 18px 45px rgba(79, 70, 229, .45);
+        }
+
+        .btn-outline:hover,
+        .dev-btn.outline:hover {
+            background: #eef2ff;
+            transform: translateY(-3px);
+        }
+
+        /* ================= IMAGE HOVER ================= */
+        .dev-photo {
+            transition: transform .35s ease;
+        }
+
+        .developer:hover .dev-photo {
+            transform: scale(1.05);
+        }
     </style>
 
     <div class="about-page">
@@ -397,7 +459,7 @@
             <!-- DEVELOPER -->
             <section>
                 <div class="developer">
-                    <img src="{{ asset('assets/images/developer.jpg') }}" class="dev-photo">
+                    <img src="{{ asset('assets/images/profile.jpg') }}" class="dev-photo">
                     <div>
                         <h3>Mido Herdiansyah</h3>
                         <div class="dev-role">Developer SiPAWA</div>

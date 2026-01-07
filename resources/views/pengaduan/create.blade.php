@@ -1,128 +1,300 @@
 @extends('layouts.main')
-@section('title','Ajukan Pengaduan')
+@section('title', 'Ajukan Pengaduan')
 
 @section('content')
-<style>
-.page{
-    background:linear-gradient(180deg,#f8fafc,#eef2ff);
-    padding:90px 24px;
-}
-.card{
-    max-width:900px;
-    margin:auto;
-    background:#fff;
-    border-radius:30px;
-    padding:50px;
-    box-shadow:0 40px 90px rgba(0,0,0,.12);
-}
-.group{margin-bottom:22px}
-label{font-weight:600;font-size:14px}
-input,select,textarea{
-    width:100%;
-    padding:14px;
-    border-radius:16px;
-    border:1px solid #e5e7eb;
-}
-textarea{min-height:140px}
-.grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-}
-.photo{
-    border:2px dashed #c7d2fe;
-    border-radius:20px;
-    padding:20px;
-    text-align:center;
-}
-.photo img{
-    max-width:100%;
-    border-radius:16px;
-    margin-bottom:10px;
-}
-.actions{
-    margin-top:36px;
-    display:flex;
-    gap:14px;
-}
-.btn-main{
-    flex:1;
-    background:#6366f1;
-    color:#fff;
-    padding:16px;
-    border-radius:18px;
-    border:none;
-    font-weight:700;
-}
-.btn-back{
-    padding:16px 28px;
-    border-radius:18px;
-    border:1px solid #6366f1;
-    color:#6366f1;
-    text-decoration:none;
-}
-</style>
+    <style>
+        * {
+            box-sizing: border-box
+        }
 
-<div class="page">
-<div class="card">
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif
+        }
 
-<h2>Ajukan Pengaduan</h2>
-<p>Isi laporan Anda dengan jelas dan lengkap</p>
+        .create-page {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f3f4f6;
+            padding: 40px;
+        }
 
-<form method="POST" action="{{ route('pengaduan.store') }}" enctype="multipart/form-data">
-@csrf
+        .create-card {
+            width: 100%;
+            max-width: 1100px;
+            background: #fff;
+            border-radius: 28px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, .15);
+        }
 
-<div class="group">
-    <label>Judul</label>
-    <input name="judul" required>
-</div>
+        .create-left {
+            background:
+                linear-gradient(180deg, rgba(15, 23, 42, .6), rgba(15, 23, 42, .9)),
+                url('{{ asset('assets/images/pengaduan-2.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-<div class="group">
-    <label>Kategori</label>
-    <select name="kategori_pengaduan_id" required>
-        @foreach($kategori as $k)
-            <option value="{{ $k->id }}">{{ $k->nama }}</option>
-        @endforeach
-    </select>
-</div>
+        .create-left h2 {
+            font-size: 28px;
+            font-weight: 700
+        }
 
-<div class="group">
-    <label>Isi Pengaduan</label>
-    <textarea name="isi_pengaduan" required></textarea>
-</div>
+        .create-left p {
+            font-size: 15px;
+            line-height: 1.7;
+            opacity: .9
+        }
 
-<div class="grid">
-    <div class="group">
-        <label>RT</label>
-        <input name="rt" required>
+        .create-right {
+            padding: 50px
+        }
+
+        .create-right h3 {
+            font-size: 26px;
+            font-weight: 800
+        }
+
+        .create-right p {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 30px
+        }
+
+        .form-group {
+            margin-bottom: 18px
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            display: block
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+
+        textarea {
+            min-height: 120px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .file-box {
+            border: 2px dashed #c7d2fe;
+            border-radius: 16px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .file-box img {
+            max-width: 100%;
+            border-radius: 14px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .actions {
+            display: flex;
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .btn-submit {
+            flex: 1;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: #fff;
+            border: none;
+            padding: 16px;
+            border-radius: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            padding: 16px 26px;
+            border-radius: 16px;
+            border: 1px solid #6366f1;
+            color: #6366f1;
+            background: transparent;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .error-box {
+            background: #fee2e2;
+            padding: 14px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+
+        .error-box li {
+            color: #991b1b;
+            font-size: 13px;
+        }
+
+        @media(max-width:900px) {
+            .create-card {
+                grid-template-columns: 1fr
+            }
+
+            .create-left {
+                min-height: 260px
+            }
+        }
+    </style>
+
+    <div class="create-page">
+        <div class="create-card">
+
+            <!-- LEFT -->
+            <div class="create-left">
+                <div>
+                    <h2>SiPAWA</h2>
+                    <p>Sistem pengaduan warga modern untuk menyampaikan aspirasi dan keluhan.</p>
+                </div>
+                <p>© {{ date('Y') }} SiPAWA</p>
+            </div>
+
+            <!-- RIGHT -->
+            <div class="create-right">
+                <h3>Ajukan Pengaduan</h3>
+                <p>Isi laporan dengan jelas agar dapat segera ditindaklanjuti</p>
+
+                @if ($errors->any())
+                    <div class="error-box">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <!-- 🔥 FORM WAJIB PUNYA ID -->
+                <form id="pengaduanForm" method="POST" action="{{ route('pengaduan.store') }}" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="grid">
+                        <div class="form-group">
+                            <label>Nama Pelapor</label>
+                            <input value="{{ auth()->user()->nama }}" readonly style="background:#f1f5f9">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input value="{{ auth()->user()->email }}" readonly style="background:#f1f5f9">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Judul Pengaduan</label>
+                        <input name="judul" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Kategori</label>
+                        <select name="kategori_pengaduan_id" required>
+                            @foreach ($kategori as $k)
+                                <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Isi Pengaduan</label>
+                        <textarea name="isi_pengaduan" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Jalan / Lokasi</label>
+                        <input name="jalan" required>
+                    </div>
+
+                    <div class="grid">
+                        <div class="form-group">
+                            <label>RT</label>
+                            <input name="rt" required>
+                        </div>
+                        <div class="form-group">
+                            <label>RW</label>
+                            <input name="rw" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Foto (Opsional)</label>
+                        <div class="file-box">
+                            <img id="preview">
+                            <input type="file" name="foto" id="foto">
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <!-- BATAL -->
+                        <button type="button" class="btn-cancel"
+                            onclick="openConfirm(
+                            'Pengaduan belum dikirim. Yakin ingin membatalkan?',
+                            () => window.location='{{ route('pengaduan.index') }}'
+                        )">
+                            Batal
+                        </button>
+
+                        <!-- KIRIM (WAJIB SUBMIT) -->
+                        <button type="submit" class="btn-submit">
+                            Kirim Pengaduan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="group">
-        <label>RW</label>
-        <input name="rw" required>
-    </div>
-</div>
 
-<div class="group">
-    <label>Foto</label>
-    <div class="photo">
-        <img id="preview" style="display:none">
-        <input type="file" name="foto" id="foto">
-    </div>
-</div>
+    <script>
+        /* PREVIEW FOTO */
+        document.getElementById('foto').addEventListener('change', function(e) {
+            const preview = document.getElementById('preview');
+            preview.src = URL.createObjectURL(e.target.files[0]);
+            preview.style.display = 'block';
+        });
 
-<div class="actions">
-    <a href="{{ route('pengaduan.index') }}" class="btn-back">Batal</a>
-    <button class="btn-main">Kirim Pengaduan</button>
-</div>
+        /* 🔥 LOGIKA KONFIRMASI SUBMIT (ANTI STUCK) */
+        const form = document.getElementById('pengaduanForm');
 
-</form>
-</div>
-</div>
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
 
-<script>
-foto.onchange=e=>{
-    preview.src=URL.createObjectURL(e.target.files[0]);
-    preview.style.display='block';
-}
-</script>
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            openConfirm(
+                'Yakin ingin mengirim pengaduan ini?',
+                () => form.submit()
+            );
+        });
+    </script>
 @endsection

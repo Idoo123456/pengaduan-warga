@@ -1,0 +1,50 @@
+<?php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
+class ProfileController extends Controller
+{
+    public function index()
+    {
+        return view('profile.index');
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'nama'  => 'required|string|max:255',
+            // sekarang support JPG + PNG
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $user       = Auth::user();
+        $user->nama = $request->nama;
+
+        // 🔥 JIKA USER KLIK HAPUS FOTO
+        if ($request->has('hapus_foto')) {
+            if ($user->photo && Storage::disk('public')->exists($user->photo)) {
+                Storage::disk('public')->delete($user->photo);
+            }
+            $user->photo = null;
+        }
+
+        // 🔥 JIKA UPLOAD FOTO BARU
+        if ($request->hasFile('photo')) {
+            if ($user->photo && Storage::disk('public')->exists($user->photo)) {
+                Storage::disk('public')->delete($user->photo);
+            }
+
+            $user->photo = $request->file('photo')->store('profile', 'public');
+        }
+
+        $user->save();
+
+        // refresh session
+        Auth::login($user);
+
+        return back()->with('success', 'Profil berhasil diperbarui');
+    }
+}

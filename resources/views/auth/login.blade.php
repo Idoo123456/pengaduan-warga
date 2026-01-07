@@ -6,86 +6,381 @@
     <title>Login | SiPAWA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{-- GOOGLE FONT --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    {{-- CSS --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/auth-login.css') }}">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f7fb;
+        }
+
+        .auth-wrapper {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 1100px;
+            background: #fff;
+            border-radius: 28px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            box-shadow: 0 40px 90px rgba(79, 70, 229, .25);
+        }
+
+        .auth-left {
+            background: linear-gradient(160deg, #6366f1, #818cf8);
+            padding: 50px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .auth-left .logo {
+            width: 130px;
+            margin-bottom: 40px;
+        }
+
+        .auth-left h1 {
+            font-size: 34px;
+            margin-bottom: 16px;
+        }
+
+        .auth-left p {
+            font-size: 15px;
+            line-height: 1.6;
+            opacity: .95;
+        }
+
+        .auth-left .illustration {
+            max-width: 320px;
+            margin-top: 40px;
+        }
+
+        .auth-right {
+            padding: 60px 50px;
+        }
+
+        .auth-right h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            background: #f1f5f9;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            border-radius: 16px;
+            background: #6366f1;
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+
+        .register-link {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .alert.success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .alert.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* MODAL */
+        .confirm-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, .55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .confirm-box {
+            background: #fff;
+            padding: 32px;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+        }
+
+        .confirm-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn-cancel,
+        .btn-confirm {
+            flex: 1;
+            padding: 12px;
+            border-radius: 999px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            background: #e5e7eb;
+        }
+
+        .btn-confirm {
+            background: #6366f1;
+            color: #fff;
+        }
+
+        /* LOADING */
+        .global-loading {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, .8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 99999;
+        }
+
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #e5e7eb;
+            border-top: 5px solid #6366f1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        @media(max-width:900px) {
+            .auth-card {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-left {
+                display: none;
+            }
+        }
+
+        /* ================= PAGE ANIMATION ================= */
+        .auth-wrapper {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: pageEnter .6s ease forwards;
+        }
+
+        @keyframes pageEnter {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="auth-wrapper">
-    <div class="auth-card">
+    <body class="page-enter">
+        <style>
+            .page-enter {
+                animation: fadeIn .5s ease;
+            }
 
-        {{-- LEFT --}}
-        <div class="auth-left">
-            <img src="{{ asset('assets/images/logo-sipawa.png') }}" class="logo">
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px)
+                }
 
-            <h1>Selamat Datang 👋</h1>
-            <p>
-                Silakan login untuk mengakses layanan pengaduan
-                dan aspirasi warga desa secara online dengan mudah
-                dan transparan.
-            </p>
+                to {
+                    opacity: 1;
+                    transform: none
+                }
+            }
+        </style>
 
-            <img src="{{ asset('assets/images/login-illustration.png') }}"
-                 class="illustration" alt="Ilustrasi Login">
-        </div>
+        <div class="auth-wrapper">
+            <div class="auth-card">
 
-        {{-- RIGHT --}}
-        <div class="auth-right">
-
-            <h2>Login</h2>
-            <p class="subtitle">Masuk ke akun Anda</p>
-
-            {{-- FLASH MESSAGE --}}
-            @if (session('success'))
-                <div class="alert success">{{ session('success') }}</div>
-            @endif
-
-            @if (session('error'))
-                <div class="alert error">{{ session('error') }}</div>
-            @endif
-
-            <form method="POST" action="{{ route('login.process') }}" autocomplete="off">
-                @csrf
-
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email"
-                           placeholder="contoh@email.com" required>
+                <div class="auth-left">
+                    <img src="{{ asset('assets/images/logo-sipawa.png') }}" class="logo">
+                    <h1>Selamat Datang 👋</h1>
+                    <p>Silakan login untuk mengakses layanan pengaduan warga.</p>
+                    <img src="{{ asset('assets/images/login-illustration.png') }}" class="illustration">
                 </div>
 
-                <div class="form-group">
-                    <label>Password</label>
+                <div class="auth-right">
 
-                    <div class="password-wrapper">
-                        <input type="password" name="password" id="password"
-                               placeholder="Masukkan password" required>
+                    <h2>Login</h2>
+                    <p class="subtitle">Masuk ke akun Anda</p>
 
-                        <button type="button" class="toggle-password"
-                                onclick="togglePassword()">👁</button>
-                    </div>
+                    @if (session('error'))
+                        <div class="alert error" id="flashMsg">{{ session('error') }}</div>
+                    @endif
+
+                    <form method="POST" action="{{ route('login.process') }}" id="loginForm">
+                        @csrf
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="password" name="password" required>
+                                <button type="button" class="toggle-password" onclick="togglePassword()">👁</button>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn-login"
+                            onclick="openConfirm('Yakin ingin login?', () => {
+                        document.getElementById('globalLoading').style.display='flex';
+                        document.getElementById('loginForm').submit();
+                    })">
+                            Login
+                        </button>
+
+                        <p class="register-link">
+                            Belum punya akun? <a href="{{ route('register') }}">Daftar sekarang</a>
+                        </p>
+                    </form>
+
                 </div>
-
-                <button type="submit" class="btn-login">
-                    Login
-                </button>
-            </form>
-
+            </div>
         </div>
-    </div>
-</div>
 
-<script>
-    function togglePassword() {
-        const input = document.getElementById('password');
-        input.type = input.type === 'password' ? 'text' : 'password';
-    }
-</script>
+        {{-- MODAL --}}
+        <div id="confirmModal" class="confirm-overlay">
+            <div class="confirm-box">
+                <h3>Konfirmasi</h3>
+                <p id="confirmText">Apakah Anda yakin?</p>
+                <div class="confirm-actions">
+                    <button class="btn-cancel" onclick="closeConfirm()">Batal</button>
+                    <button class="btn-confirm" id="confirmYes">Ya</button>
+                </div>
+            </div>
+        </div>
 
-</body>
+        {{-- LOADING --}}
+        <div id="globalLoading" class="global-loading">
+            <div class="spinner"></div>
+            <p>Memproses...</p>
+        </div>
+
+        <script>
+            function togglePassword() {
+                const p = document.getElementById('password');
+                p.type = p.type === 'password' ? 'text' : 'password';
+            }
+
+            let confirmCallback = null;
+
+            function openConfirm(msg, cb) {
+                document.getElementById('confirmText').innerText = msg;
+                document.getElementById('confirmModal').style.display = 'flex';
+                confirmCallback = cb;
+            }
+
+            function closeConfirm() {
+                document.getElementById('confirmModal').style.display = 'none';
+                confirmCallback = null;
+            }
+
+            document.getElementById('confirmYes').onclick = () => {
+                if (confirmCallback) confirmCallback();
+                closeConfirm();
+            }
+
+            setTimeout(() => {
+                const flash = document.getElementById('flashMsg');
+                if (flash) flash.remove();
+            }, 3000);
+        </script>
+        <script>
+            window.addEventListener('load', () => {
+                document.body.classList.add('loaded');
+            });
+        </script>
+
+    </body>
+
 </html>

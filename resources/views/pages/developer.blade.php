@@ -294,7 +294,7 @@
 
             <!-- PROFILE -->
             <section class="profile">
-                <img src="{{ asset('assets/images/developer.jpg') }}" alt="Developer">
+                <img src="{{ asset('assets/images/profile.jpg') }}" alt="Developer">
 
                 <div>
                     <h1>Mido Herdiansyah</h1>
