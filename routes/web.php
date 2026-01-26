@@ -4,6 +4,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/clear-cache', function () {
+    Artisan::call('optimize:clear');
+    return 'CACHE CLEARED';
+});
 
 /*
 |--------------------------------------------------------------------------

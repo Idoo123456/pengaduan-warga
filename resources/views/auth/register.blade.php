@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        /* ================= CSS ASLI (TIDAK DIUBAH) ================= */
         * {
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
@@ -25,7 +26,6 @@
             align-items: center;
         }
 
-        /* ================= PAGE ANIMATION ================= */
         body {
             opacity: 0;
             transform: translateY(30px);
@@ -50,7 +50,6 @@
             box-shadow: 0 50px 120px rgba(79, 70, 229, .25);
         }
 
-        /* LEFT */
         .left {
             background: linear-gradient(160deg, #4f46e5, #6366f1, #818cf8);
             color: #fff;
@@ -112,7 +111,6 @@
             opacity: .9;
         }
 
-        /* RIGHT */
         .right {
             padding: 70px 60px;
         }
@@ -129,7 +127,6 @@
             margin-bottom: 30px;
         }
 
-        /* FORM */
         .form-group {
             margin-bottom: 18px;
         }
@@ -208,97 +205,90 @@
 
 <body>
 
-    <div class="card">
+<div class="card">
 
-        <!-- LEFT -->
-        <div class="left">
-            <h1>Bergabung Bersama SiPAWA</h1>
-
-            <p>
-                SiPAWA adalah sistem pengaduan warga desa yang dirancang untuk
-                menciptakan lingkungan yang lebih aman, tertata, dan transparan.
-            </p>
-
-            <ul>
-                <li><span>✔️</span> Laporkan masalah desa dengan mudah</li>
-                <li><span>✔️</span> Pantau status secara transparan</li>
-                <li><span>✔️</span> Data aman & terlindungi</li>
-                <li><span>✔️</span> Solusi digital modern</li>
-            </ul>
-
-            <div class="quote">
-                “Daftar hari ini dan jadilah bagian dari solusi desa.”
-            </div>
+    <!-- LEFT -->
+    <div class="left">
+        <h1>Bergabung Bersama SiPAWA</h1>
+        <p>
+            SiPAWA adalah sistem pengaduan warga desa yang dirancang untuk
+            menciptakan lingkungan yang lebih aman, tertata, dan transparan.
+        </p>
+        <ul>
+            <li><span>✔️</span> Laporkan masalah desa dengan mudah</li>
+            <li><span>✔️</span> Pantau status secara transparan</li>
+            <li><span>✔️</span> Data aman & terlindungi</li>
+            <li><span>✔️</span> Solusi digital modern</li>
+        </ul>
+        <div class="quote">
+            “Daftar hari ini dan jadilah bagian dari solusi desa.”
         </div>
-
-        <!-- RIGHT -->
-        <div class="right">
-            <h2>Registrasi Akun</h2>
-            <p>Lengkapi data diri Anda untuk mulai menggunakan layanan</p>
-
-            @if ($errors->any())
-                <div class="alert">
-                    @foreach ($errors->all() as $e)
-                        <div>{{ $e }}</div>
-                    @endforeach
-                </div>
-            @endif
-
-            <form method="POST" action="{{ route('register.process') }}" id="registerForm" autocomplete="off">
-                @csrf
-
-                <input type="text" style="display:none">
-                <input type="password" style="display:none">
-
-                <div class="form-group">
-                    <label>Nama Lengkap</label>
-                    <input type="text" name="nama" required>
-                </div>
-
-                <div class="form-group">
-                    <label>NIK</label>
-                    <input type="text" name="nik" maxlength="16" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Ulangi Password</label>
-                    <input type="password" name="password_confirmation" required>
-                </div>
-
-                <!-- BUTTON DENGAN POPUP -->
-                <button type="button" class="btn" onclick="confirmRegister()">
-                    Daftar Sekarang
-                </button>
-            </form>
-
-            <div class="link">
-                Sudah punya akun?
-                <a href="{{ route('login') }}">Login</a>
-            </div>
-        </div>
-
     </div>
 
-    <!-- SCRIPT KONFIRMASI -->
-    <script>
-        function confirmRegister() {
-            if (confirm('Apakah data sudah benar dan siap membuat akun?')) {
-                document.getElementById('registerForm').submit();
-            }
-        }
-    </script>
+    <!-- RIGHT -->
+    <div class="right">
+        <h2>Registrasi Akun</h2>
+        <p>Lengkapi data diri Anda untuk mulai menggunakan layanan</p>
 
+        @if ($errors->any())
+            <div class="alert">
+                @foreach ($errors->all() as $e)
+                    <div>{{ $e }}</div>
+                @endforeach
+            </div>
+        @endif
+
+        <form method="POST"
+              action="{{ route('register.process') }}"
+              id="registerForm"
+              onsubmit="return confirmSubmit()"
+              autocomplete="off">
+            @csrf
+
+            <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input type="text" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label>NIK</label>
+                <input type="text" name="nik" maxlength="16" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label>Ulangi Password</label>
+                <input type="password" name="password_confirmation" required>
+            </div>
+
+            <button type="submit" class="btn">
+                Daftar Sekarang
+            </button>
+        </form>
+
+        <div class="link">
+            Sudah punya akun?
+            <a href="{{ route('login') }}">Login</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- SCRIPT AMAN -->
+<script>
+    function confirmSubmit() {
+        return confirm('Apakah data sudah benar dan siap membuat akun?');
+    }
+</script>
 
 </body>
-
 </html>
