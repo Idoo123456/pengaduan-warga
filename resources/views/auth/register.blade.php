@@ -285,10 +285,61 @@
 
 <!-- SCRIPT AMAN -->
 <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('registerForm');
+    const button = form.querySelector('button[type="submit"]');
+    let submitted = false;
+
+    form.addEventListener('submit', function (e) {
+
+        if (submitted) {
+            e.preventDefault();
+            return;
+        }
+
+        const name = form.querySelector('[name="name"]').value.trim();
+        const nik = form.querySelector('[name="nik"]').value.trim();
+        const email = form.querySelector('[name="email"]').value.trim();
+        const password = form.querySelector('[name="password"]').value;
+        const confirm = form.querySelector('[name="password_confirmation"]').value;
+
+        // VALIDASI DASAR
+        if (!name || !nik || !email || !password || !confirm) {
+            alert('Semua field wajib diisi');
+            e.preventDefault();
+            return;
+        }
+
+        if (nik.length !== 16 || isNaN(nik)) {
+            alert('NIK harus 16 digit angka');
+            e.preventDefault();
+            return;
+        }
+
+        if (password !== confirm) {
+            alert('Password dan konfirmasi tidak sama');
+            e.preventDefault();
+            return;
+        }
+
+        // KONFIRMASI
+        if (!confirmSubmit()) {
+            e.preventDefault();
+            return;
+        }
+
+        // Cegah double submit
+        submitted = true;
+        button.disabled = true;
+        button.innerText = 'Memproses...';
+    });
+
     function confirmSubmit() {
-        return confirm('Apakah data sudah benar dan siap membuat akun?');
+        return window.confirm('Apakah data sudah benar dan siap membuat akun?');
     }
+});
 </script>
+
 
 </body>
 </html>
