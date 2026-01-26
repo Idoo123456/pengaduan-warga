@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tentang', fn() => view('pages.tentang'))->name('tentang');
     Route::get('/kontak', fn() => view('pages.kontak'))->name('kontak');
     Route::get('/developer', fn() => view('pages.developer'))->name('developer');
+    Route::get('/56', fn() => view('pages.prisma'))->name('prisma');
 
     /* ===== LOGOUT ===== */
     Route::post('/logout', [AuthController::class, 'logout'])

@@ -292,12 +292,12 @@
     <!-- SCRIPT KONFIRMASI -->
     <script>
         function confirmRegister() {
-            openConfirm(
-                'Apakah data sudah benar dan siap membuat akun?',
-                () => document.getElementById('registerForm').submit()
-            );
+            if (confirm('Apakah data sudah benar dan siap membuat akun?')) {
+                document.getElementById('registerForm').submit();
+            }
         }
     </script>
+
 
 </body>
 
