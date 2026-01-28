@@ -2,383 +2,375 @@
 @section('title', 'Developer SiPAWA')
 
 @section('content')
-    <style>
-        /* ================= PAGE ================= */
-        .dev-page {
-            background: #f6f8fc;
-            padding: 80px 0 120px;
-            font-family: 'Inter', sans-serif;
-        }
+<style>
+/* ================= PAGE ================= */
+.dev-page {
+    background: #f6f8fc;
+    padding: 80px 0 120px;
+    font-family: 'Inter', sans-serif;
+}
 
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 0 20px;
-        }
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 20px;
+}
 
-        section {
-            margin-bottom: 90px
-        }
+section {
+    margin-bottom: 90px
+}
 
-        /* ================= BACK BUTTON ================= */
-        .back-wrapper {
-            margin-bottom: 40px;
-        }
+/* ================= BACK BUTTON ================= */
+.back-wrapper {
+    margin-bottom: 40px;
+}
 
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 34px;
-            border-radius: 999px;
-            background: #0f172a;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 14px 30px rgba(15, 23, 42, .35);
-            transition: .3s ease;
-        }
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 34px;
+    border-radius: 999px;
+    background: #0f172a;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 14px 30px rgba(15, 23, 42, .35);
+    transition: .3s ease;
+}
 
-        .btn-back:hover {
-            background: #1e293b;
-            transform: translateX(-6px);
-        }
+.btn-back:hover {
+    background: #1e293b;
+    transform: translateX(-6px);
+}
 
-        /* ================= PROFILE ================= */
-        .profile {
-            background: linear-gradient(135deg, #ffffff, #eef2ff);
-            border-radius: 36px;
-            padding: 70px;
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 50px;
-            align-items: center;
-            box-shadow: 0 40px 90px rgba(79, 70, 229, .25);
-            position: relative;
-            overflow: hidden;
-        }
+/* ================= PROFILE ================= */
+.profile {
+    background: linear-gradient(135deg, #ffffff, #eef2ff);
+    border-radius: 36px;
+    padding: 70px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 50px;
+    align-items: center;
+    box-shadow: 0 40px 90px rgba(79, 70, 229, .25);
+    position: relative;
+    overflow: hidden;
+}
 
-        .profile::after {
-            content: "";
-            position: absolute;
-            bottom: -120px;
-            right: -120px;
-            width: 260px;
-            height: 260px;
-            background: rgba(99, 102, 241, .15);
-            border-radius: 50%;
-        }
+.profile::after {
+    content: "";
+    position: absolute;
+    bottom: -120px;
+    right: -120px;
+    width: 260px;
+    height: 260px;
+    background: rgba(99, 102, 241, .15);
+    border-radius: 50%;
+}
 
-        .profile img {
-            width: 260px;
-            height: 260px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 8px solid #fff;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, .3);
-        }
+.profile img {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 8px solid #fff;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, .3);
+}
 
-        .profile h1 {
-            font-size: 36px;
-            margin: 0;
-        }
+.profile h1 {
+    font-size: 36px;
+    margin: 0;
+}
 
-        .role {
-            color: #6366f1;
-            font-weight: 600;
-            margin-top: 8px;
-        }
+.role {
+    color: #6366f1;
+    font-weight: 600;
+    margin-top: 8px;
+}
 
-        .profile p {
-            margin-top: 18px;
-            color: #475569;
-            line-height: 1.9;
-            max-width: 650px;
-        }
+.profile p {
+    margin-top: 18px;
+    color: #475569;
+    line-height: 1.9;
+    max-width: 650px;
+}
 
-        /* ================= ACTIONS ================= */
-        .dev-actions {
-            margin-top: 26px;
-        }
+/* ================= ACTIONS ================= */
+.dev-actions {
+    margin-top: 26px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
 
-        .dev-btn {
-            display: inline-block;
-            padding: 14px 34px;
-            border-radius: 999px;
-            background: #0f172a;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: .3s ease;
-        }
+.dev-btn {
+    display: inline-block;
+    padding: 14px 34px;
+    border-radius: 999px;
+    background: #0f172a;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s ease;
+}
 
-        .dev-btn:hover {
-            background: #1e293b;
-            transform: translateY(-2px);
-        }
+.dev-btn:hover {
+    background: #1e293b;
+    transform: translateY(-2px);
+}
 
-        /* ================= SKILLS ================= */
-        .skills {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
+/* ================= SKILLS ================= */
+.skills {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
 
-        .skill {
-            background: #fff;
-            padding: 28px;
-            border-radius: 24px;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, .08);
-        }
+.skill {
+    background: #fff;
+    padding: 28px;
+    border-radius: 24px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, .08);
+}
 
-        .skill h4 {
-            margin-bottom: 8px;
-        }
+.skill h4 {
+    margin-bottom: 8px;
+}
 
-        /* ================= CONTACT ================= */
-        .contact {
-            background: #0f172a;
-            color: #fff;
-            padding: 60px;
-            border-radius: 32px;
-        }
+/* ================= CONTACT PRO ================= */
+.contact-pro {
+    background: linear-gradient(135deg, #0f172a, #020617);
+    color: #fff;
+    padding: 70px;
+    border-radius: 36px;
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 50px;
+    box-shadow: 0 40px 90px rgba(15, 23, 42, .6);
+}
 
-        .contact h2 {
-            margin-bottom: 14px;
-        }
+.contact-pro h2 {
+    font-size: 30px;
+    margin-bottom: 14px;
+}
 
-        .contact p {
-            color: #cbd5f5;
-        }
+.contact-pro p {
+    color: #cbd5f5;
+    line-height: 1.8;
+    max-width: 520px;
+}
 
-        .contact a {
-            display: inline-block;
-            margin-top: 18px;
-            padding: 14px 34px;
-            border-radius: 999px;
-            background: #6366f1;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-        }
+.contact-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
 
-        /* ================= RESPONSIVE ================= */
-        @media(max-width:900px) {
-            .profile {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
+.btn-email,
+.btn-wa {
+    padding: 14px 34px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s ease;
+}
 
-            .skills {
-                grid-template-columns: 1fr;
-            }
-        }
+.btn-email {
+    background: #6366f1;
+    color: #fff;
+}
 
-        /* ================= CONTACT PRO ================= */
-        .contact-pro {
-            background: linear-gradient(135deg, #0f172a, #020617);
-            color: #fff;
-            padding: 70px;
-            border-radius: 36px;
-            display: grid;
-            grid-template-columns: 1.2fr .8fr;
-            gap: 50px;
-            box-shadow: 0 40px 90px rgba(15, 23, 42, .6);
-        }
+.btn-email:hover {
+    background: #4f46e5;
+    transform: translateY(-2px);
+}
 
-        .contact-pro h2 {
-            font-size: 30px;
-            margin-bottom: 14px;
-        }
+.btn-wa {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #334155;
+}
 
-        .contact-pro p {
-            color: #cbd5f5;
-            line-height: 1.8;
-            max-width: 520px;
-        }
+.btn-wa:hover {
+    background: #1e293b;
+}
 
-        .contact-actions {
-            margin-top: 30px;
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
+/* RIGHT CARD */
+.contact-card {
+    background: rgba(255, 255, 255, .05);
+    border-radius: 28px;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
 
-        .btn-email,
-        .btn-wa {
-            padding: 14px 34px;
-            border-radius: 999px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: .3s ease;
-        }
+.contact-item {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+}
 
-        .btn-email {
-            background: #6366f1;
-            color: #fff;
-        }
+.contact-item span {
+    font-size: 22px;
+}
 
-        .btn-email:hover {
-            background: #4f46e5;
-            transform: translateY(-2px);
-        }
+.contact-item strong {
+    display: block;
+    margin-bottom: 4px;
+}
 
-        .btn-wa {
-            background: transparent;
-            color: #fff;
-            border: 2px solid #334155;
-        }
+.contact-item p {
+    margin: 0;
+    color: #cbd5f5;
+    font-size: 15px;
+}
 
-        .btn-wa:hover {
-            background: #1e293b;
-        }
+/* RESPONSIVE */
+@media(max-width:900px) {
+    .profile {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
 
-        /* RIGHT CARD */
-        .contact-card {
-            background: rgba(255, 255, 255, .05);
-            border-radius: 28px;
-            padding: 36px;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
+    .skills {
+        grid-template-columns: 1fr;
+    }
 
-        .contact-item {
-            display: flex;
-            gap: 18px;
-            align-items: flex-start;
-        }
+    .contact-pro {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
 
-        .contact-item span {
-            font-size: 22px;
-        }
+    .contact-actions {
+        justify-content: center;
+    }
 
-        .contact-item strong {
-            display: block;
-            margin-bottom: 4px;
-        }
+    .contact-item {
+        justify-content: center;
+        text-align: left;
+    }
+}
+</style>
 
-        .contact-item p {
-            margin: 0;
-            color: #cbd5f5;
-            font-size: 15px;
-        }
+<div class="dev-page">
+    <div class="container">
 
-        /* RESPONSIVE */
-        @media(max-width:900px) {
-            .contact-pro {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
+        <!-- BACK -->
+        <div class="back-wrapper">
+            <a href="{{ route('tentang') }}" class="btn-back">
+                ← Kembali ke Tentang
+            </a>
+        </div>
 
-            .contact-actions {
-                justify-content: center;
-            }
+        <!-- PROFILE -->
+        <section class="profile">
+            <img src="{{ asset('assets/images/profile.jpg') }}" alt="Developer">
 
-            .contact-item {
-                justify-content: center;
-                text-align: left;
-            }
-        }
-    </style>
+            <div>
+                <h1>Mido Herdiansyah</h1>
+                <div class="role">Developer SiPAWA</div>
 
-    <div class="dev-page">
-        <div class="container">
+                <p>
+                    Mahasiswa Sistem Informasi yang berfokus pada pengembangan aplikasi
+                    berbasis web dengan pendekatan desain modern, pengalaman pengguna
+                    yang nyaman, dan sistem yang mudah digunakan oleh masyarakat.
+                </p>
 
-            <!-- BACK -->
-            <div class="back-wrapper">
-                <a href="{{ route('tentang') }}" class="btn-back">
-                    ← Kembali ke Tentang
-                </a>
+                <div class="dev-actions">
+                    <a href="#kontak" class="dev-btn">Kontak</a>
+
+                    <a href="https://github.com/Idoo123456" target="_blank" class="dev-btn">
+                        🐙 GitHub
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/USERNAME_LINKEDIN_KAMU"
+                       target="_blank"
+                       class="dev-btn">
+                        💼 LinkedIn
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section>
+            <h2 style="margin-bottom:30px">Keahlian</h2>
+
+            <div class="skills">
+                <div class="skill">
+                    <h4>Web Development</h4>
+                    <p>Laravel, PHP, MySQL</p>
+                </div>
+                <div class="skill">
+                    <h4>Frontend</h4>
+                    <p>HTML, CSS, JavaScript</p>
+                </div>
+                <div class="skill">
+                    <h4>UI / UX</h4>
+                    <p>Modern layout & clean interface</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="kontak" class="contact-pro">
+            <div>
+                <h2>Kontak Developer</h2>
+                <p>
+                    Terbuka untuk diskusi, kerja sama proyek, maupun pengembangan sistem.
+                </p>
+
+                <div class="contact-actions">
+                    <a href="mailto:mido@email.com" class="btn-email">
+                        ✉️ Kirim Email
+                    </a>
+
+                    <a href="https://wa.me/+6283862327274" target="_blank" class="btn-wa">
+                        💬 WhatsApp
+                    </a>
+
+                    <a href="https://github.com/Idoo123456" target="_blank" class="btn-wa">
+                        🐙 GitHub
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/mido-herdiansyah-024a05394"
+                       target="_blank"
+                       class="btn-wa">
+                        💼 LinkedIn
+                    </a>
+                </div>
             </div>
 
-            <!-- PROFILE -->
-            <section class="profile">
-                <img src="{{ asset('assets/images/profile.jpg') }}" alt="Developer">
-
-                <div>
-                    <h1>Mido Herdiansyah</h1>
-                    <div class="role">Developer SiPAWA</div>
-
-                    <p>
-                        Mahasiswa Sistem Informasi yang berfokus pada pengembangan aplikasi
-                        berbasis web dengan pendekatan desain modern, pengalaman pengguna
-                        yang nyaman, dan sistem yang mudah digunakan oleh masyarakat.
-                    </p>
-
-                    <div class="dev-actions">
-                        <a href="#kontak" class="dev-btn">Kontak</a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SKILLS -->
-            <section>
-                <h2 style="margin-bottom:30px">Keahlian</h2>
-
-                <div class="skills">
-                    <div class="skill">
-                        <h4>Web Development</h4>
-                        <p>Laravel, PHP, MySQL</p>
-                    </div>
-                    <div class="skill">
-                        <h4>Frontend</h4>
-                        <p>HTML, CSS, JavaScript</p>
-                    </div>
-                    <div class="skill">
-                        <h4>UI / UX</h4>
-                        <p>Modern layout & clean interface</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CONTACT -->
-            <section id="kontak" class="contact-pro">
-                <div class="contact-left">
-                    <h2>Kontak Developer</h2>
-                    <p>
-                        Terbuka untuk diskusi, kerja sama proyek, maupun pengembangan sistem.
-                        Silakan hubungi saya melalui media berikut.
-                    </p>
-
-                    <div class="contact-actions">
-                        <a href="mailto:mido@email.com" class="btn-email">
-                            ✉️ Kirim Email
-                        </a>
-
-                        <a href="https://wa.me/+6283862327274" target="_blank" class="btn-wa">
-                            💬 WhatsApp
-                        </a>
+            <div class="contact-card">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <div>
+                        <strong>Email</strong>
+                        <p>mido24simahasiswa.pcr.ac.id</p>
                     </div>
                 </div>
 
-                <div class="contact-card">
-                    <div class="contact-item">
-                        <span>📧</span>
-                        <div>
-                            <strong>Email</strong>
-                            <p>mido24simahasiswa.pcr.ac.id</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <span>🎓</span>
-                        <div>
-                            <strong>Universitas</strong>
-                            <p>Politeknik Caltex Riau</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <span>📍</span>
-                        <div>
-                            <strong>Domisili</strong>
-                            <p>Pekanbaru,Riau, Indonesia</p>
-                        </div>
+                <div class="contact-item">
+                    <span>🎓</span>
+                    <div>
+                        <strong>Universitas</strong>
+                        <p>Politeknik Caltex Riau</p>
                     </div>
                 </div>
-            </section>
 
-        </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <div>
+                        <strong>Domisili</strong>
+                        <p>Pekanbaru, Riau, Indonesia</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </div>
+</div>
 @endsection
