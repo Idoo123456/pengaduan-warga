@@ -5,13 +5,11 @@
 @section('content')
 
     <style>
-        /* ================= PAGE ================= */
         .riwayat-page {
-            padding: 60px 24px 100px;
+            padding: 60px 24px 180px;
             background: #f4f7fb;
         }
 
-        /* ================= HEADER ================= */
         .riwayat-header {
             display: flex;
             justify-content: space-between;
@@ -34,6 +32,34 @@
             text-decoration: none;
         }
 
+        /* ================= STATISTIK ================= */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 28px;
+            text-align: center;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, .08);
+        }
+
+        .stat-card h2 {
+            font-size: 36px;
+            margin: 0;
+            color: #4f46e5;
+        }
+
+        .stat-card p {
+            margin-top: 8px;
+            font-weight: 700;
+            color: #64748b;
+        }
+
         /* ================= GRID ================= */
         .riwayat-grid {
             display: grid;
@@ -41,7 +67,6 @@
             gap: 28px;
         }
 
-        /* ================= CARD ================= */
         .riwayat-card {
             background: #fff;
             border-radius: 26px;
@@ -57,18 +82,6 @@
             color: #166534;
             font-size: 12px;
             font-weight: 800;
-            margin-bottom: 14px;
-        }
-
-        .riwayat-card h3 {
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-
-        .riwayat-card p {
-            font-size: 14px;
-            color: #64748b;
             margin-bottom: 14px;
         }
 
@@ -95,18 +108,15 @@
             color: #facc15;
         }
 
-        /* ================= COMMENT ================= */
         .comment-box textarea {
             width: 100%;
             border-radius: 14px;
             border: 1px solid #e5e7eb;
             padding: 12px;
-            font-size: 14px;
             resize: none;
             margin-bottom: 12px;
         }
 
-        /* ================= BUTTON ================= */
         .btn-submit {
             width: 100%;
             padding: 12px;
@@ -127,74 +137,24 @@
             border: none;
         }
 
-        /* ================= EMPTY ================= */
-        .empty {
-            grid-column: 1 / -1;
-            background: #fff;
-            padding: 80px 20px;
-            border-radius: 28px;
-            text-align: center;
-        }
-
-        /* ================= PAGINATION (MEWAH) ================= */
         .pagination-wrapper {
             margin-top: 60px;
             display: flex;
             justify-content: center;
         }
 
-        .pagination {
-            display: flex;
-            gap: 10px;
-        }
-
-        .pagination li {
-            list-style: none;
-        }
-
-        .pagination li a,
-        .pagination li span {
-            min-width: 44px;
-            height: 44px;
-            padding: 0 16px;
-            border-radius: 999px;
-            background: #ffffff;
-            color: #334155;
-            font-weight: 700;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
-            border: 1px solid #e5e7eb;
-            transition: .25s;
-        }
-
-        .pagination li a:hover {
-            background: linear-gradient(135deg, #4f46e5, #6366f1);
-            color: #fff;
-            transform: translateY(-2px);
-        }
-
-        .pagination li.active span {
-            background: linear-gradient(135deg, #4f46e5, #6366f1);
-            color: #fff;
-            border: none;
-        }
-
-        .pagination li.disabled span {
-            opacity: .4;
-        }
-
-        /* ================= RESPONSIVE ================= */
         @media(max-width:1000px) {
-            .riwayat-grid {
+
+            .riwayat-grid,
+            .stat-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media(max-width:640px) {
-            .riwayat-grid {
+
+            .riwayat-grid,
+            .stat-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -202,25 +162,39 @@
 
     <div class="riwayat-page">
 
-        {{-- HEADER --}}
         <div class="riwayat-header">
             <div class="riwayat-title">Riwayat Pengaduan</div>
             <a href="{{ route('pengaduan.index') }}" class="btn-back">← Kembali</a>
         </div>
 
-        {{-- GRID --}}
-        <div class="riwayat-grid">
+        {{-- ================= STATISTIK ================= --}}
+        <div class="stat-grid">
+            <div class="stat-card">
+                <h2>{{ $total }}</h2>
+                <p>Total Laporan</p>
+            </div>
+            <div class="stat-card">
+                <h2>{{ $belum }}</h2>
+                <p>Belum Selesai</p>
+            </div>
+            <div class="stat-card">
+                <h2>{{ $selesai }}</h2>
+                <p>Selesai</p>
+            </div>
+        </div>
 
-            @forelse ($pengaduan as $p)
+        {{-- ================= GRID ================= --}}
+        <div class="riwayat-grid">
+            @foreach ($pengaduan as $p)
                 <div class="riwayat-card">
 
                     <span class="badge-selesai">Selesai</span>
 
                     <h3>{{ $p->judul }}</h3>
-                    <p>{{ \Illuminate\Support\Str::limit($p->isi_pengaduan, 90) }}</p>
-
+                    <p>{{ Str::limit($p->isi_pengaduan, 90) }}</p>
                     <div class="lokasi">RT {{ $p->rt }} / RW {{ $p->rw }}</div>
 
+                    {{-- ================= RATING ================= --}}
                     @if ($p->rating)
                         <div class="rating">
                             @for ($i = 1; $i <= 5; $i++)
@@ -232,10 +206,7 @@
                             <textarea rows="3" disabled>{{ $p->ulasan ?? 'Tidak ada komentar' }}</textarea>
                         </div>
 
-                        <button type="button" class="btn-disabled"
-                            onclick="openNotify('Anda sudah memberikan penilaian untuk pengaduan ini.')">
-                            Penilaian Terkirim
-                        </button>
+                        <button class="btn-disabled">Penilaian Terkirim</button>
                     @else
                         <form method="POST" action="{{ route('pengaduan.rating', $p->id) }}">
                             @csrf
@@ -258,22 +229,13 @@
                     @endif
 
                 </div>
-            @empty
-                <div class="empty">
-                    <h3>Belum ada riwayat pengaduan</h3>
-                    <p>Pengaduan yang sudah selesai akan muncul di sini.</p>
-                </div>
-            @endforelse
-
+            @endforeach
         </div>
 
         {{-- PAGINATION --}}
-        @if ($pengaduan->hasPages())
-            <div class="pagination-wrapper">
-                {{ $pengaduan->links('vendor.pagination.sipawa') }}
-
-            </div>
-        @endif
+        <div class="pagination-wrapper">
+            {{ $pengaduan->links('vendor.pagination.sipawa') }}
+        </div>
 
     </div>
 

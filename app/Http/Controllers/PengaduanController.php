@@ -45,25 +45,31 @@ class PengaduanController extends Controller
     }
 
     /* ================= RIWAYAT ================= */
-    public function riwayat(Request $request)
+    public function riwayat()
     {
-        // ❗ HANYA YANG SELESAI
-        $query = Pengaduan::where('user_id', auth()->id())
-            ->where('status', 'Selesai');
+        $userId = auth()->id();
 
-        if ($request->filled('search')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('judul', 'like', '%' . $request->search . '%')
-                    ->orWhere('isi_pengaduan', 'like', '%' . $request->search . '%');
-            });
-        }
-
-        $pengaduan = $query
+        // DATA RIWAYAT (PAGINATION)
+        $pengaduan = Pengaduan::where('user_id', $userId)
+            ->where('status', 'Selesai')
             ->latest()
-            ->paginate(6)
-            ->withQueryString();
+            ->paginate(6);
 
-        return view('pengaduan.riwayat', compact('pengaduan'));
+        // ================= STATISTIK REALTIME =================
+        $total   = Pengaduan::where('user_id', $userId)->count();
+        $selesai = Pengaduan::where('user_id', $userId)
+            ->where('status', 'Selesai')
+            ->count();
+        $belum = Pengaduan::where('user_id', $userId)
+            ->where('status', '!=', 'Selesai')
+            ->count();
+
+        return view('pengaduan.riwayat', compact(
+            'pengaduan',
+            'total',
+            'selesai',
+            'belum'
+        ));
     }
 
     /* ================= CREATE ================= */

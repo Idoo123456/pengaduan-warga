@@ -301,5 +301,29 @@
             preview.style.display = 'block';
         });
     </script>
+    <script>
+        const fields = ['judul', 'isi_pengaduan', 'jalan', 'rt', 'rw'];
+
+        fields.forEach(name => {
+            const el = document.querySelector(`[name="${name}"]`);
+            if (!el) return;
+
+            // load draft
+            if (localStorage.getItem('draft_' + name)) {
+                el.value = localStorage.getItem('draft_' + name);
+            }
+
+            // save draft
+            el.addEventListener('input', () => {
+                localStorage.setItem('draft_' + name, el.value);
+            });
+        });
+
+        // hapus draft setelah submit
+        document.getElementById('pengaduanForm')
+            .addEventListener('submit', () => {
+                fields.forEach(name => localStorage.removeItem('draft_' + name));
+            });
+    </script>
 
 @endsection
