@@ -42,14 +42,14 @@ class AuthController extends Controller
     public function registerProcess(Request $request)
     {
         $request->validate([
-            'nama'     => 'required|string|max:100',
+            'name'     => 'required|string|max:100',
             'nik'      => 'required|digits:16|unique:users,nik',
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
         ]);
 
         User::create([
-            'nama'     => $request->nama,
+            'name'     => $request->name,
             'nik'      => $request->nik,
             'email'    => $request->email,
             'password' => Hash::make($request->password),

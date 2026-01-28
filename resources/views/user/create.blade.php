@@ -19,11 +19,11 @@
         @csrf
 
         <div class="mb-3">
-            <label class="form-label">Nama</label>
+            <label class="form-label">name</label>
             <input type="text"
-                   name="nama"
+                   name="name"
                    class="form-control"
-                   value="{{ old('nama') }}">
+                   value="{{ old('name') }}">
         </div>
 
         <div class="mb-3">

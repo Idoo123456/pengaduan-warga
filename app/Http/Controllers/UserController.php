@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         // VALIDATION
         $request->validate([
-            'nama'     => 'required|string|max:100',
+            'name'     => 'required|string|max:100',
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|min:6',
             'role'     => 'required|in:admin,user',
@@ -30,7 +30,7 @@ class UserController extends Controller
 
         // SIMPAN
         User::create([
-            'nama'     => $request->nama,
+            'name'     => $request->name,
             'email'    => $request->email,
             'password' => Hash::make($request->password), // 🔥 WAJIB
             'role'     => $request->role,

@@ -11,14 +11,14 @@
 
 <table class="table table-bordered">
     <tr>
-        <th>Nama</th>
+        <th>name</th>
         <th>Email</th>
         <th>Aksi</th>
     </tr>
 
     @foreach($warga as $w)
     <tr>
-        <td>{{ $w->nama }}</td>
+        <td>{{ $w->name }}</td>
         <td>{{ $w->email }}</td>
         <td>
             <a href="{{ route('warga.edit',$w->id) }}" class="btn btn-warning btn-sm">Edit</a>

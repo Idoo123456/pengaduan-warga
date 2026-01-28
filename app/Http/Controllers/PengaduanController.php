@@ -88,7 +88,7 @@ class PengaduanController extends Controller
 
         $data = [
             'user_id'               => auth()->id(),
-            'nama'                  => auth()->user()->nama,
+            'nama'                  => auth()->user()->name,
             'kategori_pengaduan_id' => $request->kategori_pengaduan_id,
             'judul'                 => $request->judul,
             'isi_pengaduan'         => $request->isi_pengaduan,
@@ -121,7 +121,7 @@ class PengaduanController extends Controller
     {
         abort_if($pengaduan->user_id !== auth()->id(), 403);
 
-        $kategori = KategoriPengaduan::orderBy('nama')->get();
+        $kategori = KategoriPengaduan::orderBy('name')->get();
         return view('pengaduan.edit', compact('pengaduan', 'kategori'));
     }
 

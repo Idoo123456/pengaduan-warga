@@ -165,7 +165,7 @@
                         @if (auth()->user()->photo)
                             <img src="{{ asset('storage/' . auth()->user()->photo) }}?v={{ auth()->user()->updated_at }}">
                         @else
-                            {{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}
+                            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                         @endif
                     </div>
 
@@ -193,8 +193,8 @@
                         <div class="alert">{{ session('success') }}</div>
                     @endif
 
-                    <label>Nama Lengkap</label>
-                    <input type="text" name="nama" value="{{ auth()->user()->nama }}" required>
+                    <label>name Lengkap</label>
+                    <input type="text" name="name" value="{{ auth()->user()->name }}" required>
 
                     <label>Email</label>
                     <p>{{ auth()->user()->email }}</p>

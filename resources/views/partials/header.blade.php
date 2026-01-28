@@ -195,10 +195,10 @@
                         @if (auth()->user()->photo)
                             <img src="{{ asset('storage/' . auth()->user()->photo) }}">
                         @else
-                            {{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}
+                            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                         @endif
                     </span>
-                    <span class="name">{{ auth()->user()->nama }}</span>
+                    <span class="name">{{ auth()->user()->name }}</span>
                 </button>
 
                 <div class="dropdown-menu" id="userMenu">

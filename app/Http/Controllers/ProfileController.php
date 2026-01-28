@@ -15,13 +15,13 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'nama'  => 'required|string|max:255',
+            'name'  => 'required|string|max:255',
             // sekarang support JPG + PNG
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $user       = Auth::user();
-        $user->nama = $request->nama;
+        $user->name = $request->name;
 
         // 🔥 JIKA USER KLIK HAPUS FOTO
         if ($request->has('hapus_foto')) {

@@ -193,14 +193,13 @@
                     </div>
                 @endif
 
-                <!-- 🔥 FORM WAJIB PUNYA ID -->
                 <form id="pengaduanForm" method="POST" action="{{ route('pengaduan.store') }}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="grid">
                         <div class="form-group">
                             <label>Nama Pelapor</label>
-                            <input value="{{ auth()->user()->nama }}" readonly style="background:#f1f5f9">
+                            <input value="{{ auth()->user()->name }}" readonly style="background:#f1f5f9">
                         </div>
 
                         <div class="form-group">
@@ -253,7 +252,6 @@
                     </div>
 
                     <div class="actions">
-                        <!-- BATAL -->
                         <button type="button" class="btn-cancel"
                             onclick="openConfirm(
                             'Pengaduan belum dikirim. Yakin ingin membatalkan?',
@@ -262,7 +260,6 @@
                             Batal
                         </button>
 
-                        <!-- KIRIM (WAJIB SUBMIT) -->
                         <button type="submit" class="btn-submit">
                             Kirim Pengaduan
                         </button>
@@ -273,28 +270,36 @@
     </div>
 
     <script>
+        const form = document.getElementById('pengaduanForm');
+        let confirmed = false;
+
+        form.addEventListener('submit', function(e) {
+
+            // Jika belum dikonfirmasi, tahan submit
+            if (!confirmed) {
+                e.preventDefault();
+
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                openConfirm(
+                    'Yakin ingin mengirim pengaduan ini?',
+                    () => {
+                        confirmed = true; // ✅ tandai sudah konfirmasi
+                        form.submit(); // ✅ submit asli (tanpa loop)
+                    }
+                );
+            }
+        });
+
         /* PREVIEW FOTO */
         document.getElementById('foto').addEventListener('change', function(e) {
             const preview = document.getElementById('preview');
             preview.src = URL.createObjectURL(e.target.files[0]);
             preview.style.display = 'block';
         });
-
-        /* 🔥 LOGIKA KONFIRMASI SUBMIT (ANTI STUCK) */
-        const form = document.getElementById('pengaduanForm');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }
-
-            openConfirm(
-                'Yakin ingin mengirim pengaduan ini?',
-                () => form.submit()
-            );
-        });
     </script>
+
 @endsection

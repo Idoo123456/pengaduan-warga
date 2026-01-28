@@ -30,11 +30,11 @@ class WargaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama'   => 'required|min:3',
+            'name'   => 'required|min:3',
             'email'  => 'required|email|unique:wargas,email',
             'alamat' => 'required|min:5',
         ], [
-            'nama.required' => 'Nama wajib diisi',
+            'name.required' => 'name wajib diisi',
             'email.required' => 'Email wajib diisi',
             'email.email' => 'Format email tidak valid',
             'email.unique' => 'Email sudah terdaftar',
@@ -42,7 +42,7 @@ class WargaController extends Controller
         ]);
 
         Warga::create([
-            'nama'   => $request->nama,
+            'name'   => $request->name,
             'email'  => $request->email,
             'alamat' => $request->alamat,
         ]);
@@ -69,13 +69,13 @@ class WargaController extends Controller
         $warga = Warga::findOrFail($id);
 
         $request->validate([
-            'nama'   => 'required|min:3',
+            'name'   => 'required|min:3',
             'email'  => 'required|email|unique:wargas,email,' . $warga->id,
             'alamat' => 'required|min:5',
         ]);
 
         $warga->update([
-            'nama'   => $request->nama,
+            'name'   => $request->name,
             'email'  => $request->email,
             'alamat' => $request->alamat,
         ]);
