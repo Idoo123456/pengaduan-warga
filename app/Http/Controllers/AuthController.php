@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -42,17 +41,17 @@ class AuthController extends Controller
     public function registerProcess(Request $request)
     {
         $request->validate([
-            'name'     => 'required|string|max:100',
             'nik'      => 'required|digits:16|unique:users,nik',
+            'name'     => 'required|string|max:255',
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
         ]);
 
         User::create([
-            'name'     => $request->name,
             'nik'      => $request->nik,
+            'name'     => $request->name, // 🔥 INI YANG KURANG
             'email'    => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => bcrypt($request->password),
         ]);
 
         return redirect()->route('login')
