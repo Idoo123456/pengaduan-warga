@@ -86,7 +86,7 @@
         .filter-box input,
         .filter-box select {
             flex: 1 1 240px;
-            min-width: 240px;
+            min-width: 0;
             max-width: 360px;
             width: 100%;
             padding: 16px 20px;
@@ -314,64 +314,125 @@
         }
 
         @media (max-width: 768px) {
+            .page-header,
+            .filter-box,
+            .grid-box {
+                width: calc(100% - 32px);
+            }
+
             .page-header {
+                margin: 28px auto 18px;
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 14px;
-                padding: 0 16px;
+                gap: 12px;
+                padding: 0;
+            }
+
+            .page-title {
+                font-size: 24px;
+                line-height: 1.2;
             }
 
             .page-actions {
                 width: 100%;
-                justify-content: space-between;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .btn-add,
+            .btn-history {
+                min-height: 46px;
+                padding: 0 12px;
+                border-radius: 14px;
+                font-size: 13px;
+                white-space: nowrap;
             }
 
             .filter-box {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 18px 16px;
-                gap: 14px;
+                margin-bottom: 22px;
+                padding: 14px;
+                border-radius: 16px;
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 10px;
+                box-shadow: 0 12px 28px rgba(15, 23, 42, .08);
             }
 
             .filter-box input,
             .filter-box select {
                 max-width: 100%;
                 width: 100%;
+                min-width: 0;
+                min-height: 46px;
+                padding: 11px 13px;
+                border-radius: 12px;
+                font-size: 16px;
             }
 
             .grid-box {
                 grid-template-columns: 1fr;
-                gap: 24px;
-                padding: 0 16px;
+                gap: 14px;
+                padding: 0;
+                margin-bottom: 28px;
             }
 
             .card {
                 max-width: none;
                 width: 100%;
-                padding: 24px;
+                padding: 20px;
+                border-radius: 18px;
                 min-height: auto;
             }
 
             .card h3 {
-                font-size: 20px;
+                font-size: 18px;
+                line-height: 1.3;
+                margin-bottom: 10px;
             }
 
             .card p {
                 font-size: 14px;
+                line-height: 1.65;
+                min-height: 0;
+                margin-bottom: 16px;
+            }
+
+            .badge {
+                margin-bottom: 12px;
+                padding: 7px 12px;
+                font-size: 12px;
+            }
+
+            .lokasi {
+                margin-bottom: 16px;
             }
 
             .action {
-                flex-direction: column;
-                gap: 12px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
             }
 
             .btn {
+                min-width: 0;
                 width: 100%;
                 justify-content: center;
+                padding: 12px 14px;
+                border-radius: 12px;
             }
 
             .pagination-wrapper {
                 padding: 0 16px;
+                margin: 32px 0 28px;
+                overflow-x: auto;
+                justify-content: flex-start;
+            }
+
+            .empty-state {
+                padding: 34px 18px;
+                border-radius: 18px;
+                min-height: 260px;
             }
         }
     </style>

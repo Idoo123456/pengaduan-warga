@@ -25,10 +25,12 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             return redirect()->route('home')
-                ->with('success', 'Login berhasil. Selamat datang!');
+                ->with('success', 'Anda berhasil login. Selamat datang!');
         }
 
-        return back()->with('error', 'Email atau password salah.');
+        return back()
+            ->withInput($request->only('email'))
+            ->with('error', 'Email atau password salah.');
     }
 
     /* ================= REGISTER ================= */
@@ -55,7 +57,7 @@ class AuthController extends Controller
         ]);
 
         return redirect()->route('login')
-            ->with('success', 'Akun berhasil dibuat. Silakan login.');
+            ->with('success', 'Akun Anda berhasil dibuat. Silakan login.');
     }
 
     /* ================= LOGOUT ================= */
@@ -68,6 +70,6 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login')
-            ->with('success', 'Logout berhasil.');
+            ->with('success', 'Anda berhasil logout.');
     }
 }

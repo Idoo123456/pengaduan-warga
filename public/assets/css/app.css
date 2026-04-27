@@ -817,6 +817,48 @@ a:active {
 html {
     scroll-behavior: smooth;
 }
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+input,
+select,
+textarea,
+button {
+    font: inherit;
+}
+
+@media (max-width: 640px) {
+    body {
+        background: #f6f7fb;
+    }
+
+    .container {
+        width: 100%;
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .flash {
+        top: 12px;
+        left: 14px;
+        right: 14px;
+        width: auto;
+        text-align: center;
+    }
+
+    .confirm-box {
+        width: calc(100% - 32px);
+        padding: 24px 18px;
+        border-radius: 18px;
+    }
+
+    .confirm-actions {
+        flex-direction: column;
+    }
+}
 .page-loading {
     position: fixed;
     inset: 0;

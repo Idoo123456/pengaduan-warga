@@ -48,7 +48,7 @@ class PengaduanSeeder extends Seeder
 
             DB::table('pengaduans')->insert([
                 'user_id'               => $user->id,
-                'nama'                  => $user->nama ?? $user->name,
+                'nama'                  => $user->name,
 
                 'kategori_pengaduan_id' => $faker->randomElement($kategoriIds),
 

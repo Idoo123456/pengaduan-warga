@@ -5,6 +5,7 @@ use App\Models\KategoriPengaduan;
 use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class PengaduanController extends Controller
 {
@@ -112,7 +113,7 @@ class PengaduanController extends Controller
 
         return redirect()
             ->route('pengaduan.index')
-            ->with('success', 'Pengaduan berhasil dikirim');
+            ->with('success', 'Pengaduan Anda berhasil ditambahkan.');
     }
 
     /* ================= SHOW ================= */
@@ -155,6 +156,14 @@ class PengaduanController extends Controller
             'rw',
         ]);
 
+        if ($request->has('hapus_foto')) {
+            if ($pengaduan->foto && Storage::disk('public')->exists($pengaduan->foto)) {
+                Storage::disk('public')->delete($pengaduan->foto);
+            }
+
+            $data['foto'] = null;
+        }
+
         if ($request->hasFile('foto')) {
             if ($pengaduan->foto && Storage::disk('public')->exists($pengaduan->foto)) {
                 Storage::disk('public')->delete($pengaduan->foto);
@@ -166,7 +175,7 @@ class PengaduanController extends Controller
 
         return redirect()
             ->route('pengaduan.show', $pengaduan->id)
-            ->with('success', 'Pengaduan berhasil diperbarui');
+            ->with('success', 'Pengaduan Anda berhasil diperbarui.');
 
     }
 
@@ -183,7 +192,7 @@ class PengaduanController extends Controller
 
         return redirect()
             ->route('pengaduan.index')
-            ->with('success', 'Pengaduan berhasil dihapus');
+            ->with('success', 'Pengaduan Anda berhasil dihapus.');
 
     }
     /* ================= SUBMIT RATING ================= */
@@ -194,29 +203,40 @@ class PengaduanController extends Controller
 
         // ❌ Hanya pengaduan selesai
         if ($pengaduan->status !== 'Selesai') {
-            return back()->with('error', 'Pengaduan belum selesai');
+            return back()->with('error', 'Penilaian hanya bisa dikirim untuk pengaduan yang sudah selesai.');
         }
 
         // ❌ Tidak boleh kirim dua kali
         if ($pengaduan->rating !== null) {
-            return back()->with('error', 'Anda sudah memberi penilaian');
+            return back()->with('error', 'Anda sudah memberi penilaian untuk pengaduan ini.');
         }
 
         // ✅ Validasi
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'rating' => 'required|integer|min:1|max:5',
             'ulasan' => 'nullable|string|max:1000',
+        ], [
+            'rating.required' => 'Pilih jumlah bintang terlebih dahulu.',
+            'rating.integer' => 'Nilai penilaian tidak valid.',
+            'rating.min' => 'Nilai penilaian tidak valid.',
+            'rating.max' => 'Nilai penilaian tidak valid.',
+            'ulasan.max' => 'Ulasan maksimal 1000 karakter.',
         ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', $validator->errors()->first());
+        }
 
         // 💾 Simpan
         $pengaduan->update([
-            'rating' => $request->rating,
+            'rating' => (int) $request->rating,
             'ulasan' => $request->ulasan,
         ]);
-        $pengaduan = Pengaduan::where('user_id', auth()->id())
-            ->where('status', 'Selesai')
-            ->latest()
-            ->paginate(6);
+
+        return back()->with('success', 'Penilaian Anda berhasil dikirim.');
 
         return back()->with('success', 'Terima kasih atas penilaian Anda 🙏');
     }

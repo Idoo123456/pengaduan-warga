@@ -179,6 +179,77 @@
             font-size: 14px;
         }
 
+        .flash-toast {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            width: min(420px, calc(100% - 36px));
+            z-index: 1000000;
+            display: grid;
+            grid-template-columns: 34px 1fr 30px;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            border-radius: 16px;
+            color: #fff;
+            box-shadow: 0 22px 50px rgba(15, 23, 42, .22);
+            animation: flashToastIn .28s ease;
+        }
+
+        .flash-toast.success {
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+        }
+
+        .flash-toast.error {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+        }
+
+        .flash-toast.hide {
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: .25s ease;
+        }
+
+        .flash-toast-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            background: rgba(255, 255, 255, .2);
+            font-weight: 800;
+        }
+
+        .flash-toast-message {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.45;
+        }
+
+        .flash-toast-close {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .18);
+            color: #fff;
+            font-size: 20px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        @keyframes flashToastIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .link {
             text-align: center;
             margin-top: 24px;
@@ -192,12 +263,68 @@
         }
 
         @media(max-width:900px) {
+            body {
+                align-items: flex-start;
+                padding: 18px 14px;
+            }
+
             .card {
                 grid-template-columns: 1fr;
+                border-radius: 20px;
+                box-shadow: 0 18px 45px rgba(79, 70, 229, .16);
             }
 
             .left {
                 display: none;
+            }
+
+            .right {
+                padding: 28px 20px;
+            }
+
+            .right h2 {
+                font-size: 24px;
+                line-height: 1.2;
+            }
+
+            .right p {
+                margin-bottom: 22px;
+            }
+
+            .form-group {
+                margin-bottom: 14px;
+            }
+
+            input {
+                min-height: 46px;
+                padding: 11px 13px;
+                border-radius: 12px;
+                font-size: 16px;
+            }
+
+            .btn {
+                min-height: 48px;
+                padding: 13px;
+                border-radius: 12px;
+            }
+
+            .link {
+                margin-top: 18px;
+            }
+
+            .flash-toast {
+                top: 12px;
+                left: 12px;
+                right: 12px;
+                width: auto;
+                grid-template-columns: 30px 1fr 28px;
+                padding: 12px;
+                border-radius: 14px;
+            }
+
+            .flash-toast-icon {
+                width: 30px;
+                height: 30px;
             }
         }
 
@@ -278,6 +405,7 @@
 </head>
 
 <body>
+@include('partials.flash-toast')
 
 <div class="card">
 
@@ -315,7 +443,6 @@
         <form method="POST"
               action="{{ route('register.process') }}"
               id="registerForm"
-              onsubmit="return confirmSubmit()"
               autocomplete="off">
             @csrf
 

@@ -194,14 +194,75 @@
 
         /* ================= RESPONSIVE ================= */
         @media(max-width:900px) {
+            .page {
+                padding: 24px 14px 34px;
+            }
+
             .pengaduan-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 20px;
+                gap: 14px;
+                padding: 22px 18px;
+                border-radius: 18px;
+                margin-bottom: 18px;
+                box-shadow: 0 18px 45px rgba(15, 23, 42, .1);
+            }
+
+            .pengaduan-header h1 {
+                font-size: 24px;
+                line-height: 1.25;
             }
 
             .content {
                 grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .card {
+                padding: 18px;
+                border-radius: 20px;
+                box-shadow: 0 18px 45px rgba(79, 70, 229, .14);
+            }
+
+            .photo-box {
+                height: 220px;
+                border-radius: 16px;
+            }
+
+            .info {
+                grid-template-columns: 1fr;
+                row-gap: 6px;
+            }
+
+            .info b {
+                margin-top: 12px;
+            }
+
+            .actions {
+                margin-top: 28px;
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .actions .btn,
+            .actions form {
+                width: 100%;
+            }
+
+            .btn {
+                padding: 13px;
+                border-radius: 12px;
+            }
+
+            .modal-content {
+                width: calc(100% - 32px);
+                padding: 24px 18px;
+                border-radius: 18px;
+            }
+
+            .modal-actions {
+                flex-direction: column;
             }
         }
 

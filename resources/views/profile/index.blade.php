@@ -154,7 +154,7 @@
 
     <div class="profile-page">
 
-        <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data" id="profileForm">
             @csrf
 
             <div class="profile-card">
@@ -189,11 +189,15 @@
                 <div class="profile-info">
                     <h1>Profil Saya</h1>
 
-                    @if (session('success'))
-                        <div class="alert">{{ session('success') }}</div>
+                    @if ($errors->any())
+                        <div class="alert" style="background:#fee2e2;color:#991b1b">
+                            @foreach ($errors->all() as $error)
+                                <div>{{ $error }}</div>
+                            @endforeach
+                        </div>
                     @endif
 
-                    <label>name Lengkap</label>
+                    <label>Nama Lengkap</label>
                     <input type="text" name="name" value="{{ auth()->user()->name }}" required>
 
                     <label>Email</label>
@@ -228,6 +232,20 @@
                     input.files[0].name :
                     'Belum ada file';
             });
+
+            const form = document.getElementById('profileForm');
+            if (form) {
+                form.addEventListener('submit', (event) => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        form.reportValidity();
+                        return;
+                    }
+
+                    const pageLoading = document.getElementById('pageLoading');
+                    if (pageLoading) pageLoading.classList.add('show');
+                });
+            }
         });
     </script>
 

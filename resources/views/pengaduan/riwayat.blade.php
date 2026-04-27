@@ -98,14 +98,36 @@
             margin-bottom: 12px;
         }
 
-        .rating label {
+        .rating label,
+        .rating span,
+        .rating button {
             font-size: 22px;
-            cursor: pointer;
             color: #cbd5f5;
+            line-height: 1;
         }
 
-        .rating label.active {
+        .rating button {
+            appearance: none;
+            border: 0;
+            background: transparent;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .rating label {
+            cursor: pointer;
+        }
+
+        .rating label.active,
+        .rating span.active,
+        .rating button.active {
             color: #facc15;
+        }
+
+        .rating-hint {
+            margin: -4px 0 10px;
+            color: #64748b;
+            font-size: 13px;
         }
 
         .comment-box textarea {
@@ -152,10 +174,57 @@
         }
 
         @media(max-width:640px) {
+            .riwayat-page {
+                padding: 24px 14px 48px;
+            }
+
+            .riwayat-header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 12px;
+                margin-bottom: 20px;
+            }
+
+            .riwayat-title {
+                font-size: 24px;
+                line-height: 1.2;
+            }
+
+            .btn-back {
+                width: 100%;
+                text-align: center;
+                border-radius: 12px;
+            }
 
             .riwayat-grid,
             .stat-grid {
                 grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .stat-grid {
+                margin-bottom: 22px;
+            }
+
+            .stat-card,
+            .riwayat-card {
+                padding: 20px;
+                border-radius: 18px;
+            }
+
+            .stat-card h2 {
+                font-size: 30px;
+            }
+
+            .comment-box textarea {
+                font-size: 16px;
+                border-radius: 12px;
+            }
+
+            .pagination-wrapper {
+                margin-top: 32px;
+                overflow-x: auto;
+                justify-content: flex-start;
             }
         }
     </style>
@@ -208,15 +277,17 @@
 
                         <button class="btn-disabled">Penilaian Terkirim</button>
                     @else
-                        <form method="POST" action="{{ route('pengaduan.rating', $p->id) }}">
+                        <form method="POST" action="{{ route('pengaduan.rating', $p->id) }}" class="rating-form no-loading">
                             @csrf
-                            <input type="hidden" name="rating">
+                            <input type="hidden" name="rating" value="{{ old('rating') }}">
 
                             <div class="rating" data-rating>
                                 @for ($i = 1; $i <= 5; $i++)
                                     <label>★</label>
                                 @endfor
                             </div>
+
+                            <div class="rating-hint">Pilih 1 sampai 5 bintang</div>
 
                             <div class="comment-box">
                                 <textarea name="ulasan" rows="3" placeholder="Tulis komentar untuk petugas..."></textarea>
@@ -252,6 +323,26 @@
                         stars[i].classList.add('active');
                     }
                 });
+            });
+        });
+
+        document.querySelectorAll('.rating-form').forEach(form => {
+            form.addEventListener('submit', event => {
+                const input = form.querySelector('input[name="rating"]');
+
+                if (!input || !input.value) {
+                    event.preventDefault();
+                    if (typeof openNotify === 'function') {
+                        openNotify('Pilih jumlah bintang terlebih dahulu.');
+                    } else {
+                        alert('Pilih jumlah bintang terlebih dahulu.');
+                    }
+                    return;
+                }
+
+                if (typeof showLoading === 'function') {
+                    showLoading();
+                }
             });
         });
     </script>

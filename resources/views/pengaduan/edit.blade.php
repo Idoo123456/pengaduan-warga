@@ -95,6 +95,57 @@ textarea{min-height:160px}
 @media(max-width:900px){
     .card{padding:40px}
 }
+@media(max-width:640px){
+    .page{
+        padding:24px 14px 34px;
+    }
+    .card{
+        padding:24px 18px;
+        border-radius:20px;
+        box-shadow:0 18px 45px rgba(79,70,229,.16);
+    }
+    .header{
+        margin-bottom:24px;
+    }
+    .header h2{
+        font-size:24px;
+        line-height:1.2;
+    }
+    .group{
+        margin-bottom:16px;
+    }
+    input,select,textarea{
+        min-height:46px;
+        padding:11px 13px;
+        border-radius:12px;
+        font-size:16px;
+    }
+    textarea{
+        min-height:130px;
+    }
+    .grid{
+        grid-template-columns:1fr;
+        gap:0;
+    }
+    .photo-box{
+        padding:16px;
+        border-radius:16px;
+    }
+    .photo-actions{
+        flex-direction:column;
+    }
+    .actions{
+        margin-top:28px;
+        flex-direction:column;
+        gap:10px;
+    }
+    .btn-main,.btn-back,.btn-danger{
+        width:100%;
+        padding:14px;
+        border-radius:12px;
+        text-align:center;
+    }
+}
 </style>
 
 <div class="page">
@@ -105,7 +156,7 @@ textarea{min-height:160px}
     <p>Perbarui laporan Anda jika ada perubahan</p>
 </div>
 
-<form method="POST" action="{{ route('pengaduan.update',$pengaduan->id) }}" enctype="multipart/form-data">
+<form method="POST" action="{{ route('pengaduan.update',$pengaduan->id) }}" enctype="multipart/form-data" class="no-loading" id="editPengaduanForm">
 @csrf
 @method('PUT')
 
@@ -157,8 +208,8 @@ textarea{min-height:160px}
             Ganti Foto
             <input type="file" name="foto" hidden>
         </label>
-        <button name="hapus_foto" value="1" class="btn-danger"
-            onclick="return confirm('Hapus foto ini?')">
+        <button type="submit" name="hapus_foto" value="1" class="btn-danger"
+            onclick="return confirmPhotoDelete(event)">
             Hapus Foto
         </button>
     </div>
@@ -184,18 +235,39 @@ textarea{min-height:160px}
 
 <script>
 function confirmUpdate() {
-    if (window.confirm('Simpan perubahan pada pengaduan ini?')) {
-        // Tampilkan loading jika tersedia
-        const pageLoading = document.getElementById('pageLoading');
-        if (pageLoading) {
-            pageLoading.classList.add('show');
-        }
+    const form = document.getElementById('editPengaduanForm');
+    if (!form) return;
 
-        // Submit form
-        setTimeout(() => {
-            document.querySelector('form').submit();
-        }, 200);
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
     }
+
+    openConfirm('Simpan perubahan pada pengaduan ini?', () => {
+        showLoading();
+        form.submit();
+    });
+}
+
+function confirmPhotoDelete(event) {
+    event.preventDefault();
+
+    const form = document.getElementById('editPengaduanForm');
+    if (!form) return false;
+
+    openConfirm('Hapus foto pengaduan ini?', () => {
+        showLoading();
+
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'hapus_foto';
+        input.value = '1';
+        form.appendChild(input);
+
+        form.submit();
+    });
+
+    return false;
 }
 </script>
 @endsection

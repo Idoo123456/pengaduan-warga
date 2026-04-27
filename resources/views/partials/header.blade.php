@@ -171,14 +171,14 @@
             }
 
             .header-wrap {
-                padding: 10px 16px 12px;
-                align-items: flex-start;
-                gap: 12px;
+                padding: 8px 14px 10px;
+                align-items: center;
+                gap: 10px;
                 flex-wrap: wrap;
             }
 
             .logo img {
-                height: 52px;
+                height: 46px;
             }
 
             .nav-menu {
@@ -186,17 +186,17 @@
                 width: 100%;
                 display: grid;
                 grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 8px;
-                padding-top: 4px;
+                gap: 6px;
+                padding-top: 2px;
             }
 
             .nav-menu a {
-                min-height: 42px;
-                padding: 10px 8px;
-                border-radius: 14px;
+                min-height: 38px;
+                padding: 9px 6px;
+                border-radius: 12px;
                 background: #f8fafc;
                 text-align: center;
-                font-size: 13px;
+                font-size: 12px;
             }
 
             .nav-menu a::after {
@@ -208,8 +208,8 @@
             }
 
             .avatar {
-                width: 40px;
-                height: 40px;
+                width: 38px;
+                height: 38px;
             }
 
             .name {
@@ -218,11 +218,21 @@
 
             .dropdown-menu {
                 position: fixed;
-                top: 76px;
+                top: 68px;
                 left: 16px;
                 right: 16px;
                 width: auto;
                 border-radius: 18px;
+            }
+
+            .modal-content {
+                width: calc(100% - 32px);
+                padding: 24px 18px;
+                border-radius: 18px;
+            }
+
+            .modal-actions {
+                flex-direction: column;
             }
         }
 
@@ -377,9 +387,10 @@
                     <a href="{{ route('profile.password') }}">🔐 Ganti Password</a>
 
                     {{-- LOGOUT (SATU-SATUNYA) --}}
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('logout') }}" id="logoutForm" class="no-loading">
                         @csrf
-                        <button type="submit"
+                        <button type="button"
+                            onclick="confirmLogout(event)"
                             style="
             width:100%;
             padding:12px;
@@ -448,7 +459,8 @@
     function proceedLogout() {
         closeLogoutModal();
         showLoading();
-        document.getElementById('logoutForm').submit();
+        const form = document.getElementById('logoutForm');
+        if (form) form.submit();
     }
 
     function showLoading() {

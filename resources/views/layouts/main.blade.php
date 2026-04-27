@@ -10,6 +10,8 @@
 
 <body>
 
+    @include('partials.flash-toast')
+
     {{-- HEADER --}}
     @include('partials.header')
 
@@ -104,6 +106,94 @@
             color: #fff;
             font-weight: 700;
             cursor: pointer;
+        }
+
+        .flash-toast {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            width: min(420px, calc(100% - 36px));
+            z-index: 1000000;
+            display: grid;
+            grid-template-columns: 34px 1fr 30px;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 14px;
+            border-radius: 16px;
+            color: #fff;
+            box-shadow: 0 22px 50px rgba(15, 23, 42, .22);
+            animation: flashToastIn .28s ease;
+        }
+
+        .flash-toast.success {
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+        }
+
+        .flash-toast.error {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+        }
+
+        .flash-toast.hide {
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: .25s ease;
+        }
+
+        .flash-toast-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            background: rgba(255, 255, 255, .2);
+            font-weight: 800;
+        }
+
+        .flash-toast-message {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.45;
+        }
+
+        .flash-toast-close {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .18);
+            color: #fff;
+            font-size: 20px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        @keyframes flashToastIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media(max-width:640px) {
+            .flash-toast {
+                top: 12px;
+                left: 12px;
+                right: 12px;
+                width: auto;
+                grid-template-columns: 30px 1fr 28px;
+                padding: 12px;
+                border-radius: 14px;
+            }
+
+            .flash-toast-icon {
+                width: 30px;
+                height: 30px;
+            }
         }
 
         .page-loading {

@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'User Warga',
             'email' => 'user@desa.test',
+            'nik' => '6543210987654321',
             'password' => Hash::make('password'),
             'role' => 'user',
         ]);

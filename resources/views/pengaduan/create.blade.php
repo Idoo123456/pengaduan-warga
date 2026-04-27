@@ -156,12 +156,93 @@
         }
 
         @media(max-width:900px) {
+            .create-page {
+                min-height: auto;
+                align-items: flex-start;
+                padding: 18px 14px 32px;
+            }
+
             .create-card {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr;
+                border-radius: 18px;
+                box-shadow: 0 18px 45px rgba(15, 23, 42, .12);
             }
 
             .create-left {
-                min-height: 260px
+                min-height: 150px;
+                padding: 24px;
+            }
+
+            .create-left h2 {
+                font-size: 22px;
+            }
+
+            .create-left p:last-child {
+                display: none;
+            }
+
+            .create-right {
+                padding: 24px 18px;
+            }
+
+            .create-right h3 {
+                font-size: 23px;
+                line-height: 1.2;
+            }
+
+            .create-right p {
+                margin-bottom: 22px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .form-group {
+                margin-bottom: 14px;
+            }
+
+            input,
+            select,
+            textarea {
+                min-height: 46px;
+                padding: 11px 13px;
+                border-radius: 12px;
+                font-size: 16px;
+            }
+
+            textarea {
+                min-height: 130px;
+            }
+
+            .file-box {
+                padding: 14px;
+                border-radius: 14px;
+            }
+
+            .actions {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin-top: 22px;
+            }
+
+            .btn-submit,
+            .btn-cancel {
+                width: 100%;
+                padding: 14px;
+                border-radius: 12px;
+            }
+
+            .modal-content {
+                width: calc(100% - 32px);
+                padding: 24px 18px;
+                border-radius: 18px;
+            }
+
+            .modal-actions {
+                flex-direction: column;
             }
         }
 
@@ -308,7 +389,7 @@
                     </div>
                 @endif
 
-                <form id="pengaduanForm" method="POST" action="{{ route('pengaduan.store') }}" enctype="multipart/form-data" onsubmit="return handleFormSubmit(event)">
+                <form id="pengaduanForm" class="no-loading" method="POST" action="{{ route('pengaduan.store') }}" enctype="multipart/form-data" onsubmit="return handleFormSubmit(event)">
                     @csrf
 
                     <div class="grid">
