@@ -23,8 +23,15 @@
 
     {{-- ================= LOADING GLOBAL ================= --}}
     <div id="pageLoading" class="page-loading">
-        <div class="loader"></div>
-        <p>Memproses...</p>
+        <div class="loading-container">
+            <div class="loader-pulse"></div>
+            <p class="loading-text">Memproses...</p>
+        </div>
+    </div>
+
+    {{-- ================= MINI LOADING (untuk ajax/form tanpa page reload) ================= --}}
+    <div id="miniLoading" class="mini-loading">
+        <div class="loader-dots"></div>
     </div>
 
     {{-- ================= CONFIRM MODAL ================= --}}
@@ -102,7 +109,7 @@
         .page-loading {
             position: fixed;
             inset: 0;
-            background: rgba(255, 255, 255, .95);
+            background: linear-gradient(135deg, rgba(255, 255, 255, .98) 0%, rgba(249, 250, 251, .98) 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -110,7 +117,8 @@
             z-index: 999999;
             opacity: 0;
             pointer-events: none;
-            transition: .3s;
+            transition: opacity .3s cubic-bezier(.4, 0, .2, 1);
+            backdrop-filter: blur(2px);
         }
 
         .page-loading.show {
@@ -118,19 +126,114 @@
             pointer-events: auto;
         }
 
-        .loader {
-            width: 48px;
-            height: 48px;
-            border: 4px solid #e5e7eb;
-            border-top-color: #6366f1;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 12px;
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
         }
 
-        @keyframes spin {
+        /* ============= LOADER PULSE (untuk page transitions) ============= */
+        .loader-pulse {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                #6366f1 0deg,
+                #a78bfa 90deg,
+                #e5e7eb 360deg
+            );
+            animation: rotateLoader 2s linear infinite, pulseLoader 2s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(99, 102, 241, .3);
+        }
+
+        @keyframes rotateLoader {
+            from {
+                transform: rotate(0deg);
+            }
             to {
-                transform: rotate(360deg)
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulseLoader {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(99, 102, 241, .2);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(99, 102, 241, .4);
+            }
+        }
+
+        .loading-text {
+            color: #475569;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            animation: textFade 1.5s ease-in-out infinite;
+        }
+
+        @keyframes textFade {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ============= MINI LOADING (untuk ajax requests) ============= */
+        .mini-loading {
+            position: fixed;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s ease;
+        }
+
+        .mini-loading.show {
+            opacity: 1;
+        }
+
+        .loader-dots {
+            display: flex;
+            gap: 6px;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 999px;
+            box-shadow: 0 8px 24px rgba(99, 102, 241, .3);
+        }
+
+        .loader-dots::before,
+        .loader-dots::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #fff;
+            animation: dotsBounce 1.4s ease-in-out infinite;
+        }
+
+        .loader-dots::before {
+            animation-delay: -0.32s;
+        }
+
+        .loader-dots::after {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes dotsBounce {
+            0%, 80%, 100% {
+                opacity: 0.5;
+                transform: translateY(0);
+            }
+            40% {
+                opacity: 1;
+                transform: translateY(-8px);
             }
         }
 
@@ -147,64 +250,104 @@
         }
     </style>
 
-    {{-- ================= SCRIPT GLOBAL ================= --}}
+    {{-- ================= SCRIPT GLOBAL LOADING ================= --}}
     <script>
+        // Enhanced loading system dengan berbagai tipe
+        const LoadingManager = {
+            showPage() {
+                const pageLoading = document.getElementById('pageLoading');
+                if (pageLoading) pageLoading.classList.add('show');
+            },
+            hidePage() {
+                const pageLoading = document.getElementById('pageLoading');
+                if (pageLoading) pageLoading.classList.remove('show');
+            },
+            showMini() {
+                const miniLoading = document.getElementById('miniLoading');
+                if (miniLoading) miniLoading.classList.add('show');
+            },
+            hideMini() {
+                const miniLoading = document.getElementById('miniLoading');
+                if (miniLoading) miniLoading.classList.remove('show');
+            }
+        };
+
+        // Shortcut functions
+        function showLoading() {
+            LoadingManager.showPage();
+        }
+        function hideLoading() {
+            LoadingManager.hidePage();
+        }
+
         let confirmCallback = null;
 
-        function openConfirm(text, callback) {
-            document.getElementById('confirmText').innerText = text;
-            document.getElementById('confirmModal').style.display = 'flex';
-            confirmCallback = callback;
+        function openConfirm(message, callback) {
+            confirmCallback = typeof callback === 'function' ? callback : null;
+
+            const modal = document.getElementById('confirmModal');
+            const text = document.getElementById('confirmText');
+            const yes = document.getElementById('confirmYes');
+
+            if (text) text.textContent = message || 'Apakah Anda yakin?';
+            if (modal) modal.style.display = 'flex';
+            if (yes) {
+                yes.onclick = () => {
+                    const callback = confirmCallback;
+                    closeConfirm();
+                    if (callback) callback();
+                };
+            }
         }
 
         function closeConfirm() {
-            document.getElementById('confirmModal').style.display = 'none';
+            const modal = document.getElementById('confirmModal');
+            if (modal) modal.style.display = 'none';
             confirmCallback = null;
         }
 
-        document.getElementById('confirmYes').onclick = () => {
-            if (confirmCallback) confirmCallback();
-            closeConfirm();
-        }
+        function openNotify(message) {
+            const modal = document.getElementById('notifyModal');
+            const text = document.getElementById('notifyText');
 
-        function openNotify(text) {
-            document.getElementById('notifyText').innerText = text;
-            document.getElementById('notifyModal').style.display = 'flex';
+            if (text) text.textContent = message || '';
+            if (modal) modal.style.display = 'flex';
         }
 
         function closeNotify() {
-            document.getElementById('notifyModal').style.display = 'none';
+            const modal = document.getElementById('notifyModal');
+            if (modal) modal.style.display = 'none';
         }
 
-        function showLoading() {
-            document.getElementById('pageLoading').classList.add('show');
-        }
-
+        // Hide loading when page fully loads
         window.addEventListener('load', () => {
-            document.getElementById('pageLoading').classList.remove('show');
+            setTimeout(() => {
+                LoadingManager.hidePage();
+            }, 300);
         });
-    </script>
 
-    {{-- ================= GLOBAL LOADING (HANYA TAMBAH IF) ================= --}}
-    <script>
+        // Auto hide loading untuk AJAX requests (jika menggunakan fetch/axios)
         document.addEventListener('DOMContentLoaded', () => {
-
-            document.querySelectorAll('a[href]').forEach(link => {
-                link.addEventListener('click', () => {
-                    showLoading();
+            // Tangkap semua link kecuali yang membuka di tab baru atau memiliki data-no-loading
+            document.querySelectorAll('a[href]:not([target="_blank"])[data-no-loading!=true]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    // Jangan tampilkan loading jika link adalah hash atau eksternal
+                    const href = link.getAttribute('href');
+                    if (href && !href.startsWith('#') && !href.startsWith('http')) {
+                        LoadingManager.showPage();
+                    }
                 });
             });
 
+            // Form submission - show loading untuk form biasa, mini-loading untuk AJAX
             document.querySelectorAll('form').forEach(form => {
-                form.addEventListener('submit', () => {
-
-                    // 🔥 INI SAJA YANG DITAMBAHKAN
-                    if (form.id === 'pengaduanForm') return;
-
-                    showLoading();
+                form.addEventListener('submit', (e) => {
+                    // Skip jika form punya class no-loading atau data-async
+                    if (!form.classList.contains('no-loading') && !form.dataset.async) {
+                        LoadingManager.showPage();
+                    }
                 });
             });
-
         });
     </script>
 

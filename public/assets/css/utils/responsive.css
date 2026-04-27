@@ -1,0 +1,313 @@
+/* =========================
+   Responsive App Overrides
+   Desktop keeps the spacious layout, mobile becomes app-like for WebView.
+========================= */
+
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+input,
+select,
+textarea,
+button {
+    font: inherit;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        max-width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    section,
+    .hero,
+    .hero-modern {
+        padding-top: 64px;
+        padding-bottom: 64px;
+    }
+
+    .hero-grid {
+        gap: 36px;
+    }
+
+    .hero-content h1,
+    .hero-text h1 {
+        font-size: 42px;
+    }
+
+    .hero-bg-gradient {
+        width: 340px;
+        height: 430px;
+    }
+
+    .hero-img {
+        max-height: 430px;
+    }
+
+    .feature-grid,
+    .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        background: #f8fafc;
+        overflow-x: hidden;
+    }
+
+    .page {
+        min-height: calc(100vh - 170px);
+    }
+
+    .container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    section,
+    .hero,
+    .hero-modern {
+        padding-top: 36px;
+        padding-bottom: 44px;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr !important;
+        gap: 28px;
+        text-align: left;
+    }
+
+    .hero-content h1,
+    .hero-text h1 {
+        font-size: 34px !important;
+        line-height: 1.18;
+    }
+
+    .hero-content p,
+    .hero-text p {
+        font-size: 15px;
+        margin-bottom: 24px;
+    }
+
+    .hero-badge,
+    .badge {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .btn,
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline,
+    .btn-hero-primary,
+    .btn-hero-outline {
+        width: 100%;
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 13px 18px;
+        border-radius: 14px;
+    }
+
+    .hero-visual {
+        width: 100%;
+        min-height: 310px;
+        align-items: center;
+    }
+
+    .hero-bg-gradient {
+        width: min(76vw, 300px) !important;
+        height: 330px !important;
+        border-radius: 28px;
+    }
+
+    .hero-img {
+        max-height: 340px !important;
+    }
+
+    .feature-grid,
+    .process-grid,
+    .testi-grid,
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .card,
+    .pengaduan-card {
+        border-radius: 18px;
+        padding: 20px;
+    }
+
+    .page-header,
+    .pengaduan-header,
+    .card-top,
+    .card-bottom,
+    .card-header,
+    .card-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+    }
+
+    .page-title {
+        font-size: 26px;
+    }
+
+    .page-actions,
+    .card-actions,
+    .action {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .filter-box input,
+    .filter-box select {
+        min-width: 0 !important;
+        max-width: none !important;
+        min-height: 48px;
+    }
+
+    .grid-box {
+        grid-template-columns: 1fr !important;
+    }
+
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .pagination li a,
+    .pagination li span {
+        min-width: 42px;
+        min-height: 42px;
+        padding: 10px 14px;
+    }
+
+    .create-page {
+        align-items: flex-start;
+        padding: 18px 14px 32px;
+    }
+
+    .create-card {
+        grid-template-columns: 1fr !important;
+        border-radius: 22px;
+    }
+
+    .create-left {
+        min-height: 180px !important;
+        padding: 28px 22px !important;
+    }
+
+    .create-right {
+        padding: 28px 20px !important;
+    }
+
+    .create-right h3,
+    .header h2 {
+        font-size: 24px !important;
+    }
+
+    .grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    input,
+    select,
+    textarea {
+        min-height: 48px;
+        font-size: 16px !important;
+    }
+
+    textarea {
+        min-height: 130px;
+    }
+
+    .actions,
+    .modal-actions,
+    .confirm-actions,
+    .photo-actions {
+        flex-direction: column;
+    }
+
+    .btn-cancel,
+    .btn-submit,
+    .btn-main,
+    .btn-back,
+    .btn-danger,
+    .btn-submit-confirm,
+    .btn-logout {
+        width: 100%;
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .footer {
+        padding: 34px 0;
+    }
+
+    .footer-grid {
+        text-align: left;
+    }
+
+    .flash {
+        top: 16px;
+        left: 16px;
+        right: 16px;
+        width: auto;
+        text-align: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .hero-content h1,
+    .hero-text h1 {
+        font-size: 29px !important;
+    }
+
+    .hero-content p,
+    .hero-text p {
+        font-size: 14px;
+    }
+
+    .hero-visual {
+        min-height: 270px;
+    }
+
+    .hero-bg-gradient {
+        width: 250px !important;
+        height: 285px !important;
+    }
+
+    .hero-img {
+        max-height: 295px !important;
+    }
+
+    .page-title {
+        font-size: 24px;
+    }
+
+    .empty-state {
+        padding: 40px 18px;
+    }
+}

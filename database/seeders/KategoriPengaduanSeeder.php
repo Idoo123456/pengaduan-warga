@@ -10,15 +10,15 @@ class KategoriPengaduanSeeder extends Seeder
     {
         $kategori = [
             'Infrastruktur',
-            'Lingkungan',
-            'Kebersihan',
             'Keamanan',
-            'Pelayanan Publik',
+            'Kebersihan',
             'Kesehatan',
-            'Pendidikan',
-            'Transportasi',
-            'Sosial',
             'Lainnya',
+            'Lingkungan',
+            'Pelayanan Publik',
+            'Pendidikan',
+            'Sosial',
+            'Transportasi',
         ];
 
         foreach ($kategori as $nama) {

@@ -166,8 +166,178 @@
         }
 
         @media(max-width:900px) {
+            .site-header {
+                position: sticky;
+            }
+
+            .header-wrap {
+                padding: 10px 16px 12px;
+                align-items: flex-start;
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+
+            .logo img {
+                height: 52px;
+            }
+
             .nav-menu {
+                order: 3;
+                width: 100%;
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 8px;
+                padding-top: 4px;
+            }
+
+            .nav-menu a {
+                min-height: 42px;
+                padding: 10px 8px;
+                border-radius: 14px;
+                background: #f8fafc;
+                text-align: center;
+                font-size: 13px;
+            }
+
+            .nav-menu a::after {
                 display: none;
+            }
+
+            .user-btn {
+                padding: 4px;
+            }
+
+            .avatar {
+                width: 40px;
+                height: 40px;
+            }
+
+            .name {
+                display: none;
+            }
+
+            .dropdown-menu {
+                position: fixed;
+                top: 76px;
+                left: 16px;
+                right: 16px;
+                width: auto;
+                border-radius: 18px;
+            }
+        }
+
+        /* ============= MODAL LOGOUT KEEN ============= */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .6);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: modalFade .3s ease;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 24px;
+            padding: 32px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, .15);
+            animation: modalSlide .4s cubic-bezier(.34, 1.56, .64, 1);
+        }
+
+        .modal-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            animation: bounceIn .6s ease;
+        }
+
+        .modal-content h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+        .modal-content p {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .modal-actions button {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all .2s ease;
+            border: none;
+        }
+
+        .btn-cancel {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .btn-cancel:hover {
+            background: #e5e7eb;
+            transform: translateY(-1px);
+        }
+
+        .btn-logout {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, .3);
+        }
+
+        .btn-logout:hover {
+            background: linear-gradient(135deg, #b91c1c, #991b1b);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(220, 38, 38, .4);
+        }
+
+        @keyframes modalFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: scale(.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
             }
         }
     </style>
@@ -250,39 +420,35 @@
         });
     </script>
 </header>
-<script>
-    function confirmLogout(e) {
-        e.preventDefault(); // hentikan submit dulu
 
-        openConfirm(
-            'Apakah Anda yakin ingin logout?',
-            () => {
-                document.getElementById('logoutForm').submit();
-            }
-        );
-
-        return false;
-    }
-</script>
-<!-- LOADING OVERLAY -->
-<div id="pageLoading" class="page-loading">
-    <div class="loader"></div>
-    <p>Logging out...</p>
+<!-- MODAL LOGOUT KEEN -->
+<div id="logoutModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-icon">👋</div>
+        <h3>Yakin ingin keluar?</h3>
+        <p>Anda akan kembali ke halaman login dan perlu login lagi untuk melanjutkan.</p>
+        <div class="modal-actions">
+            <button class="btn-cancel" onclick="closeLogoutModal()">Batal</button>
+            <button class="btn-logout" onclick="proceedLogout()">Ya, Logout</button>
+        </div>
+    </div>
 </div>
 
 <script>
     function confirmLogout(e) {
         e.preventDefault();
-
-        openConfirm(
-            'Apakah Anda yakin ingin logout?',
-            () => {
-                showLoading();
-                document.getElementById('logoutForm').submit();
-            }
-        );
-
+        document.getElementById('logoutModal').style.display = 'flex';
         return false;
+    }
+
+    function closeLogoutModal() {
+        document.getElementById('logoutModal').style.display = 'none';
+    }
+
+    function proceedLogout() {
+        closeLogoutModal();
+        showLoading();
+        document.getElementById('logoutForm').submit();
     }
 
     function showLoading() {

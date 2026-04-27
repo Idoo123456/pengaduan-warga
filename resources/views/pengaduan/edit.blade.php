@@ -170,11 +170,32 @@ textarea{min-height:160px}
 </div>
 
 <div class="actions">
-<a href="{{ route('pengaduan.show',$pengaduan->id) }}" class="btn-back">Batal</a>
-<button class="btn-main">Simpan Perubahan</button>
+<a href="{{ route('pengaduan.show',$pengaduan->id) }}"
+   class="btn-back"
+   onclick="event.preventDefault(); openConfirm('Apakah Anda yakin untuk kembali? Perubahan yang belum disimpan akan hilang.', () => window.location='{{ route('pengaduan.show',$pengaduan->id) }}')">
+    Batal
+</a>
+<button type="button" class="btn-main" onclick="confirmUpdate()">Simpan Perubahan</button>
 </div>
 
 </form>
 </div>
 </div>
+
+<script>
+function confirmUpdate() {
+    if (window.confirm('Simpan perubahan pada pengaduan ini?')) {
+        // Tampilkan loading jika tersedia
+        const pageLoading = document.getElementById('pageLoading');
+        if (pageLoading) {
+            pageLoading.classList.add('show');
+        }
+
+        // Submit form
+        setTimeout(() => {
+            document.querySelector('form').submit();
+        }, 200);
+    }
+}
+</script>
 @endsection

@@ -5,17 +5,27 @@
 @section('content')
 
     <style>
-        /* ================= HEADER ================= */
+        /* ================= PAGE LAYOUT ================= */
+        .page-header,
+        .filter-box,
+        .grid-box {
+            max-width: 1320px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .page-header {
-            margin: 36px auto 24px;
-            max-width: 1100px;
+            margin: 48px auto 28px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            padding: 0 20px;
         }
 
         .page-title {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 800;
             color: #0f172a;
         }
@@ -23,73 +33,120 @@
         .page-actions {
             display: flex;
             gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-add,
+        .btn-history {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 0 22px;
+            border-radius: 999px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
         }
 
         .btn-add {
             background: linear-gradient(135deg, #4f46e5, #6366f1);
             color: #fff;
-            padding: 14px 22px;
-            border-radius: 999px;
-            font-weight: 700;
-            text-decoration: none;
-            box-shadow: 0 12px 30px rgba(79, 70, 229, .35);
+            box-shadow: 0 14px 30px rgba(79, 70, 229, .25);
+        }
+
+        .btn-add:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 36px rgba(79, 70, 229, .28);
         }
 
         .btn-history {
             background: #fff;
             color: #4f46e5;
-            padding: 14px 22px;
-            border-radius: 999px;
-            font-weight: 700;
-            text-decoration: none;
             border: 1px solid #e5e7eb;
+        }
+
+        .btn-history:hover {
+            background: #eef2ff;
         }
 
         /* ================= FILTER ================= */
         .filter-box {
-            max-width: 1100px;
             margin: 0 auto 36px;
-            padding: 18px;
+            padding: 20px 22px;
             background: #fff;
-            border-radius: 22px;
-            box-shadow: 0 20px 40px rgba(15, 23, 42, .08);
+            border-radius: 24px;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, .08);
             display: flex;
-            gap: 14px;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
         }
 
         .filter-box input,
         .filter-box select {
-            padding: 14px 18px;
-            border-radius: 999px;
+            flex: 1 1 240px;
+            min-width: 240px;
+            max-width: 360px;
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 18px;
             border: 1px solid #e5e7eb;
             background: #f8fafc;
-            min-width: 240px;
+            color: #0f172a;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .filter-box input::placeholder {
+            color: #94a3b8;
         }
 
         /* ================= GRID ================= */
         .grid-box {
-            max-width: 1100px;
-            margin: auto;
+            margin-bottom: 44px;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+            align-items: stretch;
+            padding: 0 20px;
         }
 
         /* ================= CARD ================= */
         .card {
-            background: #fff;
-            border-radius: 26px;
-            padding: 26px;
-            box-shadow: 0 20px 45px rgba(15, 23, 42, .08);
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 32px 28px;
+            border: 1px solid rgba(226, 232, 240, .9);
+            box-shadow: 0 24px 60px rgba(15, 23, 42, .08);
+            transition: transform .2s ease, box-shadow .2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 320px;
+        }
+
+        @media (max-width: 1100px) {
+            .grid-box {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 30px 72px rgba(15, 23, 42, .12);
         }
 
         .badge {
-            padding: 6px 16px;
+            padding: 9px 18px;
             border-radius: 999px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
-            margin-bottom: 16px;
-            display: inline-block;
+            margin-bottom: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: .01em;
         }
 
         .badge.dikirim {
@@ -103,34 +160,49 @@
         }
 
         .card h3 {
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 800;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
+            color: #0f172a;
+            line-height: 1.15;
         }
 
         .card p {
-            font-size: 14px;
-            color: #64748b;
-            margin-bottom: 18px;
+            font-size: 15px;
+            color: #475569;
+            margin-bottom: 22px;
+            line-height: 1.8;
+            min-height: 78px;
         }
 
         .lokasi {
-            font-size: 13px;
+            font-size: 14px;
+            color: #334155;
             font-weight: 700;
-            margin-bottom: 18px;
+            margin-bottom: 24px;
         }
 
         .action {
             display: flex;
-            gap: 10px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .btn {
-            padding: 10px 18px;
+            min-width: 120px;
+            padding: 13px 22px;
             border-radius: 999px;
             font-size: 14px;
             font-weight: 700;
             text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform .2s ease, background .2s ease, color .2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
         }
 
         .btn-detail {
@@ -138,26 +210,65 @@
             color: #4338ca;
         }
 
+        .btn-detail:hover {
+            background: #dbeafe;
+        }
+
         .btn-edit {
             background: #fef3c7;
             color: #92400e;
+        }
+
+        .btn-edit:hover {
+            background: #fde68a;
         }
 
         /* ================= EMPTY ================= */
         .empty-state {
             grid-column: 1 / -1;
             text-align: center;
-            padding: 80px 20px;
+            padding: 64px 32px;
             background: #fff;
             border-radius: 28px;
-            box-shadow: 0 25px 60px rgba(15, 23, 42, .1);
+            box-shadow: 0 28px 70px rgba(15, 23, 42, .1);
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+        }
+
+        .empty-state .empty-icon {
+            width: 82px;
+            height: 82px;
+            border-radius: 22px;
+            background: #eef2ff;
+            display: grid;
+            place-items: center;
+            color: #4f46e5;
+            font-size: 32px;
+            box-shadow: inset 0 0 0 1px rgba(79, 70, 229, .12);
+        }
+
+        .empty-state h3 {
+            font-size: 24px;
+            margin-bottom: 0;
+            color: #0f172a;
+        }
+
+        .empty-state p {
+            margin: 0;
+            color: #64748b;
+            max-width: 520px;
+            line-height: 1.75;
         }
 
         /* ================= PAGINATION (FINAL & RAPI) ================= */
         .pagination-wrapper {
             display: flex;
             justify-content: center;
-            margin: 60px 0 40px;
+            margin: 56px 0 40px;
         }
 
         .pagination {
@@ -200,6 +311,68 @@
         .pagination li.disabled span {
             opacity: .5;
             cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+                padding: 0 16px;
+            }
+
+            .page-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .filter-box {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 18px 16px;
+                gap: 14px;
+            }
+
+            .filter-box input,
+            .filter-box select {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .grid-box {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                padding: 0 16px;
+            }
+
+            .card {
+                max-width: none;
+                width: 100%;
+                padding: 24px;
+                min-height: auto;
+            }
+
+            .card h3 {
+                font-size: 20px;
+            }
+
+            .card p {
+                font-size: 14px;
+            }
+
+            .action {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .pagination-wrapper {
+                padding: 0 16px;
+            }
         }
     </style>
 
@@ -245,8 +418,9 @@
             </div>
         @empty
             <div class="empty-state">
+                <div class="empty-icon">📭</div>
                 <h3>Belum ada pengaduan</h3>
-                <p>Silakan buat pengaduan pertama Anda.</p>
+                <p>Data pengaduan Anda masih kosong. Buat laporan pertama agar aspirasi Anda segera diproses.</p>
                 <a href="{{ route('pengaduan.create') }}" class="btn-add">+ Buat Pengaduan</a>
             </div>
         @endforelse

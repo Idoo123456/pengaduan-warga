@@ -202,30 +202,76 @@
             color: #fff;
         }
 
-        /* LOADING */
+        /* ============= LOADING LOGIN ============= */
         .global-loading {
             position: fixed;
             inset: 0;
-            background: rgba(255, 255, 255, .8);
+            background: linear-gradient(135deg, rgba(255, 255, 255, .98) 0%, rgba(249, 250, 251, .98) 100%);
             display: none;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
-            z-index: 99999;
+            flex-direction: column;\n            z-index: 99999;
+            backdrop-filter: blur(3px);
+        }
+
+        .global-loading.active {
+            display: flex;
         }
 
         .spinner {
-            width: 48px;
-            height: 48px;
-            border: 5px solid #e5e7eb;
-            border-top: 5px solid #6366f1;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+            width: 70px;
+            height: 70px;
+            position: relative;
+            margin-bottom: 20px;
         }
 
-        @keyframes spin {
+        .spinner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                #6366f1 0deg,
+                #8b5cf6 120deg,
+                #ec4899 240deg,
+                #6366f1 360deg
+            );
+            animation: spinGradient 2.5s linear infinite;
+        }
+
+        .spinner::after {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border-radius: 50%;
+            background: #fff;
+            z-index: 1;
+        }
+
+        @keyframes spinGradient {
+            from {
+                transform: rotate(0deg);
+            }
             to {
-                transform: rotate(360deg)
+                transform: rotate(360deg);
+            }
+        }
+
+        .global-loading p {
+            color: #475569;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.6px;
+            animation: loadingText 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingText {
+            0%, 100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
             }
         }
 
@@ -291,11 +337,7 @@
                     <h2>Login</h2>
                     <p class="subtitle">Masuk ke akun Anda</p>
 
-                    @if (session('error'))
-                        <div class="alert error" id="flashMsg">{{ session('error') }}</div>
-                    @endif
-
-                    <form method="POST" action="{{ route('login.process') }}" id="loginForm">
+                    <form method="POST" action="{{ route('login.process') }}" id="loginForm" onsubmit="handleLoginSubmit(event)">
                         @csrf
 
                         <div class="form-group">
@@ -311,11 +353,7 @@
                             </div>
                         </div>
 
-                        <button type="button" class="btn-login"
-                            onclick="openConfirm('Yakin ingin login?', () => {
-                        document.getElementById('globalLoading').style.display='flex';
-                        document.getElementById('loginForm').submit();
-                    })">
+                        <button type="submit" class="btn-login">
                             Login
                         </button>
 
@@ -376,6 +414,23 @@
             }, 3000);
         </script>
         <script>
+            function handleLoginSubmit(e) {
+                const form = e.target;
+                if (!form.checkValidity()) {
+                    e.preventDefault();
+                    form.reportValidity();
+                    return false;
+                }
+
+                // Show loading
+                const loading = document.getElementById('globalLoading');
+                if (loading) {
+                    loading.classList.add('active');
+                }
+
+                return true;
+            }
+
             window.addEventListener('load', () => {
                 document.body.classList.add('loaded');
             });

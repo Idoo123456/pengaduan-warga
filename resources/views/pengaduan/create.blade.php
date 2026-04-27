@@ -164,6 +164,121 @@
                 min-height: 260px
             }
         }
+
+        /* ============= MODAL SUBMIT KEEN ============= */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .6);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: modalFade .3s ease;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 24px;
+            padding: 32px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, .15);
+            animation: modalSlide .4s cubic-bezier(.34, 1.56, .64, 1);
+        }
+
+        .modal-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            animation: bounceIn .6s ease;
+        }
+
+        .modal-content h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+        .modal-content p {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .modal-actions button {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all .2s ease;
+            border: none;
+        }
+
+        .btn-cancel {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .btn-cancel:hover {
+            background: #e5e7eb;
+            transform: translateY(-1px);
+        }
+
+        .btn-submit-confirm {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, .3);
+        }
+
+        .btn-submit-confirm:hover {
+            background: linear-gradient(135deg, #4f46e5, #3730a3);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, .4);
+        }
+
+        @keyframes modalFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: scale(.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
     </style>
 
     <div class="create-page">
@@ -193,7 +308,7 @@
                     </div>
                 @endif
 
-                <form id="pengaduanForm" method="POST" action="{{ route('pengaduan.store') }}" enctype="multipart/form-data">
+                <form id="pengaduanForm" method="POST" action="{{ route('pengaduan.store') }}" enctype="multipart/form-data" onsubmit="return handleFormSubmit(event)">
                     @csrf
 
                     <div class="grid">
@@ -216,8 +331,11 @@
                     <div class="form-group">
                         <label>Kategori</label>
                         <select name="kategori_pengaduan_id" required>
+                            <option value="" disabled {{ old('kategori_pengaduan_id') ? '' : 'selected' }}>Pilih kategori pengaduan</option>
                             @foreach ($kategori as $k)
-                                <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                                <option value="{{ $k->id }}" {{ old('kategori_pengaduan_id') == $k->id ? 'selected' : '' }}>
+                                    {{ $k->nama }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -254,7 +372,7 @@
                     <div class="actions">
                         <button type="button" class="btn-cancel"
                             onclick="openConfirm(
-                            'Pengaduan belum dikirim. Yakin ingin membatalkan?',
+                            'Apakah Anda yakin untuk kembali? Pengaduan yang belum dikirim tidak akan tersimpan.',
                             () => window.location='{{ route('pengaduan.index') }}'
                         )">
                             Batal
@@ -270,60 +388,98 @@
     </div>
 
     <script>
-        const form = document.getElementById('pengaduanForm');
-        let confirmed = false;
+        let formSubmitted = false;
 
-        form.addEventListener('submit', function(e) {
+        function handleFormSubmit(e) {
+            // Cek validitas form
+            const form = e.target;
+            if (!form.checkValidity()) {
+                e.preventDefault();
+                form.reportValidity();
+                return false;
+            }
 
             // Jika belum dikonfirmasi, tahan submit
-            if (!confirmed) {
+            if (!formSubmitted) {
                 e.preventDefault();
-
-                if (!form.checkValidity()) {
-                    form.reportValidity();
-                    return;
-                }
-
-                openConfirm(
-                    'Yakin ingin mengirim pengaduan ini?',
-                    () => {
-                        confirmed = true; // ✅ tandai sudah konfirmasi
-                        form.submit(); // ✅ submit asli (tanpa loop)
-                    }
-                );
+                document.getElementById('submitModal').style.display = 'flex';
+                return false;
             }
-        });
+
+            return true;
+        }
+
+        function closeSubmitModal() {
+            document.getElementById('submitModal').style.display = 'none';
+        }
+
+        function proceedSubmit() {
+            closeSubmitModal();
+            formSubmitted = true;
+
+            // Tampilkan loading
+            const pageLoading = document.getElementById('pageLoading');
+            if (pageLoading) {
+                pageLoading.classList.add('show');
+            }
+
+            // Submit form
+            document.getElementById('pengaduanForm').submit();
+        }
 
         /* PREVIEW FOTO */
-        document.getElementById('foto').addEventListener('change', function(e) {
-            const preview = document.getElementById('preview');
-            preview.src = URL.createObjectURL(e.target.files[0]);
-            preview.style.display = 'block';
-        });
-    </script>
-    <script>
-        const fields = ['judul', 'isi_pengaduan', 'jalan', 'rt', 'rw'];
-
-        fields.forEach(name => {
-            const el = document.querySelector(`[name="${name}"]`);
-            if (!el) return;
-
-            // load draft
-            if (localStorage.getItem('draft_' + name)) {
-                el.value = localStorage.getItem('draft_' + name);
+        document.addEventListener('DOMContentLoaded', function() {
+            const fotoInput = document.getElementById('foto');
+            if (fotoInput) {
+                fotoInput.addEventListener('change', function(e) {
+                    const preview = document.getElementById('preview');
+                    if (preview && e.target.files[0]) {
+                        preview.src = URL.createObjectURL(e.target.files[0]);
+                        preview.style.display = 'block';
+                    }
+                });
             }
 
-            // save draft
-            el.addEventListener('input', () => {
-                localStorage.setItem('draft_' + name, el.value);
-            });
-        });
+            /* DRAFT AUTOSAVE */
+            const fields = ['judul', 'isi_pengaduan', 'jalan', 'rt', 'rw'];
+            fields.forEach(name => {
+                const el = document.querySelector(`[name="${name}"]`);
+                if (!el) return;
 
-        // hapus draft setelah submit
-        document.getElementById('pengaduanForm')
-            .addEventListener('submit', () => {
-                fields.forEach(name => localStorage.removeItem('draft_' + name));
+                // Load draft
+                if (localStorage.getItem('draft_' + name)) {
+                    el.value = localStorage.getItem('draft_' + name);
+                }
+
+                // Save draft on input
+                el.addEventListener('input', () => {
+                    localStorage.setItem('draft_' + name, el.value);
+                });
             });
+
+            // Clear draft setelah submit sukses
+            const form = document.getElementById('pengaduanForm');
+            if (form) {
+                const originalSubmit = form.submit;
+                form.submit = function() {
+                    fields.forEach(name => localStorage.removeItem('draft_' + name));
+                    originalSubmit.call(this);
+                };
+            }
+        });
     </script>
+
+    <!-- MODAL KIRIM PENGADUAN KEEN -->
+    <div id="submitModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-icon">📤</div>
+            <h3>Kirim Pengaduan?</h3>
+            <p>Pastikan data sudah benar. Pengaduan akan diproses oleh petugas terkait.</p>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeSubmitModal()">Periksa Lagi</button>
+                <button class="btn-submit-confirm" onclick="proceedSubmit()">Ya, Kirim</button>
+            </div>
+        </div>
+    </div>
 
 @endsection

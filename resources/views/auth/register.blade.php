@@ -200,6 +200,80 @@
                 display: none;
             }
         }
+
+        /* ============= LOADING REGISTER ============= */
+        .global-loading {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, .98) 0%, rgba(249, 250, 251, .98) 100%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 99999;
+            backdrop-filter: blur(3px);
+        }
+
+        .global-loading.active {
+            display: flex;
+        }
+
+        .spinner {
+            width: 70px;
+            height: 70px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .spinner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                #6366f1 0deg,
+                #8b5cf6 120deg,
+                #ec4899 240deg,
+                #6366f1 360deg
+            );
+            animation: spinGradient 2.5s linear infinite;
+        }
+
+        .spinner::after {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border-radius: 50%;
+            background: #fff;
+            z-index: 1;
+        }
+
+        @keyframes spinGradient {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .global-loading p {
+            color: #475569;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.6px;
+            animation: loadingText 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingText {
+            0%, 100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
@@ -283,6 +357,12 @@
 
 </div>
 
+<!-- LOADING -->
+<div id="globalLoading" class="global-loading">
+    <div class="spinner"></div>
+    <p>Membuat akun...</p>
+</div>
+
 <!-- SCRIPT AMAN -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -332,6 +412,7 @@ document.addEventListener('DOMContentLoaded', function () {
         submitted = true;
         button.disabled = true;
         button.innerText = 'Memproses...';
+        document.getElementById('globalLoading').classList.add('active');
     });
 
     function confirmSubmit() {

@@ -49,7 +49,7 @@ class AuthController extends Controller
 
         User::create([
             'nik'      => $request->nik,
-            'name'     => $request->name, // 🔥 INI YANG KURANG
+            'name'     => $request->name,
             'email'    => $request->email,
             'password' => bcrypt($request->password),
         ]);
