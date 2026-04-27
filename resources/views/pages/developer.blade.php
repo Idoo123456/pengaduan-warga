@@ -230,27 +230,149 @@ section {
 
 /* RESPONSIVE */
 @media(max-width:900px) {
+    .dev-page {
+        padding: 24px 0 48px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 0 14px;
+    }
+
+    section {
+        margin-bottom: 34px;
+    }
+
+    .back-wrapper {
+        margin-bottom: 18px;
+    }
+
+    .btn-back {
+        width: 100%;
+        justify-content: center;
+        padding: 13px 16px;
+        border-radius: 14px;
+        transform: none !important;
+    }
+
     .profile {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 22px;
+        padding: 24px 18px;
+        border-radius: 20px;
+        box-shadow: 0 18px 45px rgba(79, 70, 229, .16);
+        overflow: hidden;
+    }
+
+    .profile::after {
+        display: none;
+    }
+
+    .profile img {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+        border-width: 5px;
+    }
+
+    .profile h1 {
+        font-size: 26px;
+        line-height: 1.2;
+    }
+
+    .profile p {
+        font-size: 14px;
+        line-height: 1.7;
+        margin-top: 14px;
+    }
+
+    .dev-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .dev-btn {
+        width: 100%;
+        text-align: center;
+        padding: 13px 16px;
+        border-radius: 14px;
+        transform: none !important;
     }
 
     .skills {
         grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    section > h2 {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 16px !important;
+    }
+
+    .skill {
+        padding: 20px;
+        border-radius: 18px;
+        text-align: center;
     }
 
     .contact-pro {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 22px;
+        padding: 24px 18px;
+        border-radius: 20px;
+        box-shadow: 0 18px 45px rgba(15, 23, 42, .22);
+    }
+
+    .contact-pro h2 {
+        font-size: 24px;
+        line-height: 1.2;
+    }
+
+    .contact-pro p {
+        font-size: 14px;
+        line-height: 1.7;
     }
 
     .contact-actions {
-        justify-content: center;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .btn-email,
+    .btn-wa {
+        width: 100%;
+        padding: 13px 16px;
+        border-radius: 14px;
+        text-align: center;
+        transform: none !important;
+    }
+
+    .contact-card {
+        padding: 18px;
+        border-radius: 16px;
+        gap: 14px;
     }
 
     .contact-item {
-        justify-content: center;
+        justify-content: flex-start;
         text-align: left;
+        gap: 12px;
+        padding: 12px;
+        border-radius: 14px;
+        background: rgba(255,255,255,.05);
+    }
+
+    .contact-item p {
+        font-size: 13px;
+        line-height: 1.5;
+        word-break: break-word;
     }
 }
 </style>

@@ -331,7 +331,7 @@
         .feature:hover,
         .step:hover {
             transform: translateY(-10px);
-            box-shadow: 0 30px 80px rgba(79, 70j70, 229, .25);
+            box-shadow: 0 30px 80px rgba(79, 70, 229, .25);
         }
 
         /* ================= BUTTON HOVER ================= */
@@ -360,6 +360,150 @@
 
         .developer:hover .dev-photo {
             transform: scale(1.05);
+        }
+
+        @media(max-width:640px) {
+            .about-page {
+                padding: 24px 0 48px;
+            }
+
+            .container {
+                width: 100%;
+                padding: 0 14px;
+            }
+
+            section {
+                margin-bottom: 34px;
+            }
+
+            .hero {
+                gap: 18px;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+                line-height: 1.22;
+            }
+
+            .hero h1 br {
+                display: none;
+            }
+
+            .hero p {
+                font-size: 14px;
+                line-height: 1.7;
+                margin-top: 14px;
+            }
+
+            .hero-actions {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin-top: 22px;
+            }
+
+            .btn-primary,
+            .btn-outline,
+            .dev-btn {
+                width: 100%;
+                padding: 13px 16px;
+                border-radius: 14px;
+                transform: none !important;
+                text-align: center;
+            }
+
+            .info-card,
+            .metric,
+            .feature,
+            .step,
+            .developer {
+                padding: 20px;
+                border-radius: 18px;
+                box-shadow: 0 14px 34px rgba(15, 23, 42, .08);
+                transform: none !important;
+            }
+
+            .metrics,
+            .feature-grid,
+            .steps {
+                gap: 14px;
+            }
+
+            .metric h2 {
+                font-size: 26px;
+            }
+
+            .section-title {
+                margin-bottom: 20px;
+            }
+
+            .section-title h2 {
+                font-size: 25px;
+                line-height: 1.2;
+            }
+
+            .section-title p {
+                font-size: 14px;
+            }
+
+            .feature,
+            .step {
+                text-align: center;
+            }
+
+            .step::before {
+                display: none;
+            }
+
+            .step span {
+                font-size: 34px;
+            }
+
+            .developer {
+                gap: 20px;
+                overflow: hidden;
+            }
+
+            .developer::after {
+                display: none;
+            }
+
+            .dev-photo {
+                width: 150px;
+                height: 150px;
+                margin: 0 auto;
+                border-width: 5px;
+                transform: none !important;
+            }
+
+            .developer h3 {
+                font-size: 25px;
+                line-height: 1.2;
+            }
+
+            .developer p {
+                font-size: 14px;
+                line-height: 1.7;
+            }
+
+            .dev-actions {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin-top: 20px;
+            }
+
+            .info-card:hover,
+            .metric:hover,
+            .feature:hover,
+            .step:hover,
+            .btn-primary:hover,
+            .btn-outline:hover,
+            .dev-btn:hover,
+            .developer:hover .dev-photo {
+                transform: none;
+            }
         }
     </style>
 
